@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d1w5ccem33kle"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_riqys"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bhunq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bhunq"]
+top_radius = 0.3
+bottom_radius = 0.1
+height = 1.0
+
+[node name="Player" type="CharacterBody3D" unique_id=739378603]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1568447067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_riqys")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=27021968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_bhunq")
+
+[node name="Head" type="Node3D" parent="." unique_id=1036590572]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1528974035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=727940332]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5, -0.5)
+mesh = SubResource("CylinderMesh_bhunq")
