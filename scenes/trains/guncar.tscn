@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://kwhmlfkni0u3"]
+
+[ext_resource type="PackedScene" uid="uid://eqfltya1x608" path="res://assets/trains/guncar.glb" id="1_6jyqf"]
+
+[node name="guncar" unique_id=450380557 instance=ExtResource("1_6jyqf")]
