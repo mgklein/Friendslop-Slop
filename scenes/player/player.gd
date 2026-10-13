@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 
@@ -12,6 +13,17 @@ const JUMP_VELOCITY = 4.5
 
 @onready var menu: Control = %Menu
 @onready var button_leave: Button = %ButtonLeave
+@onready var label_session: Label = %LabelSession
+@onready var button_copy_session: Button = %ButtonCopySession
+
+@onready var canvas_layer: CanvasLayer = %CanvasLayer
+@onready var hit_marker: Label = %HitMarker
+
+@onready var sound_hit: AudioStreamPlayer = %SoundHit
+@onready var sound_ping: AudioStreamPlayer = %SoundPing
+
+
+var immobile := false
 
 
 func _enter_tree() -> void:
@@ -22,16 +34,22 @@ func _ready() -> void:
 	menu.hide()
 	add_to_group("Players")
 	nameplate.text = name
+	hit_marker.hide()
 	
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
+		canvas_layer.hide()
 		return
 	
-	menu.hide()
+	if Global.username: nameplate.text = Global.username
+	
+	label_session.text = Network.tube_client.session_id
 	camera_3d.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	button_leave.pressed.connect(func(): Network.leave_server())
+	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
+	DisplayServer.clipboard_set(Network.tube_client.session_id)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -45,12 +63,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("menu") and not menu.visible:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		menu.show()
-	elif Input.is_action_just_pressed("menu") and menu.visible:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		menu.hide()
+	if Input.is_action_just_pressed("menu"):
+		open_menu(menu.visible)
+	
+	if immobile:
+		return
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
@@ -69,6 +86,10 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if immobile:
+		direction = Vector3.ZERO
+	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -79,8 +100,37 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func open_menu(current_visibility: bool):
+	menu.visible = !current_visibility
+	
+	immobile = menu.visible
+	if menu.visible:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
 func shoot():
-	var facing_dir = -head.transform.basis.z
 	var force = 100
 	var pos = global_position
-	Global.shoot_ball.rpc_id(1, pos, facing_dir, force)
+	var shoot_dir = get_shoot_direction()
+	Global.shoot_ball.rpc_id(1, pos, shoot_dir, force)
+
+
+func get_shoot_direction():
+	var viewport_rect = get_viewport().get_visible_rect().size
+	var raycast_start = camera_3d.project_ray_origin(viewport_rect / 2)
+	var raycast_end = raycast_start + camera_3d.project_ray_normal(viewport_rect / 2) * 200
+	return (raycast_end - raycast_start).normalized()
+
+
+@rpc("any_peer", "call_local")
+func register_hit(is_dead = false):
+	if is_dead:
+		sound_ping.play()
+	else:
+		sound_hit.play()
+	
+	hit_marker.show()
+	await get_tree().create_timer(0.2).timeout
+	hit_marker.hide()

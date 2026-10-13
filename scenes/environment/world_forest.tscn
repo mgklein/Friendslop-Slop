@@ -35,6 +35,36 @@ sky_material = SubResource("ProceduralSkyMaterial_sn0t7")
 background_mode = 2
 sky = SubResource("Sky_riqys")
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_riqys"]
+plane = Plane(1, 0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sn0t7"]
+size = Vector2(50, 5)
+orientation = 0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3pli8"]
+plane = Plane(-1, 0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1o1l2"]
+flip_faces = true
+size = Vector2(50, 5)
+orientation = 0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_j6fc8"]
+plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0wskc"]
+size = Vector2(50, 5)
+orientation = 2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dxoa6"]
+plane = Plane(0, 0, -1, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bpyjm"]
+flip_faces = true
+size = Vector2(50, 5)
+orientation = 2
+
 [node name="WorldForest" type="Node3D" unique_id=1143457166]
 script = ExtResource("1_3pli8")
 
@@ -98,5 +128,40 @@ unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 2.9802322e-08, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, 9.536743e-07, 0, -4.7683716e-07)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=553200101]
-_spawnable_scenes = PackedStringArray("uid://dlsk78b4aki17")
+_spawnable_scenes = PackedStringArray("uid://dlsk78b4aki17", "uid://bho3wc4uv8v07")
 spawn_path = NodePath("../SpawnContainer")
+
+[node name="TimerTarget" type="Timer" parent="." unique_id=1991264593]
+unique_name_in_owner = true
+wait_time = 5.0
+autostart = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=769379621]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=788188671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_riqys")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=507337532]
+mesh = SubResource("PlaneMesh_sn0t7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=837155212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_3pli8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D2" unique_id=1458581948]
+mesh = SubResource("PlaneMesh_1o1l2")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1209589246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+shape = SubResource("WorldBoundaryShape3D_j6fc8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D3" unique_id=1258781018]
+mesh = SubResource("PlaneMesh_0wskc")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" unique_id=1526922815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+shape = SubResource("WorldBoundaryShape3D_dxoa6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D4" unique_id=543480135]
+mesh = SubResource("PlaneMesh_bpyjm")

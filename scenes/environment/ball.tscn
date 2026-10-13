@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://btoqkodvkp2te" path="res://assets/kenney_prototype-textures/PNG/Red/texture_09.png" id="1_jnxa0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
+radius = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sn0t7"]
 albedo_texture = ExtResource("1_jnxa0")
@@ -11,6 +12,8 @@ uv1_triplanar = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_riqys"]
 material = SubResource("StandardMaterial3D_sn0t7")
+radius = 0.2
+height = 0.4
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jnxa0"]
 properties/0/path = NodePath(".:rotation")
@@ -21,7 +24,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_riqys"]
-radius = 0.66
+radius = 0.4
 
 [node name="Ball" type="RigidBody3D" unique_id=789545362]
 collision_layer = 0
@@ -46,7 +49,6 @@ outline_size = 8
 
 [node name="Area3D" type="Area3D" parent="." unique_id=292032087]
 collision_layer = 0
-collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1425161739]
 shape = SubResource("SphereShape3D_riqys")

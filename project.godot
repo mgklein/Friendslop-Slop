@@ -31,7 +31,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tile-run-instances/plugin.cfg")
+enabled=PackedStringArray("res://addons/tile-run-instances/plugin.cfg", "res://addons/tube/plugin.cfg")
 
 [file_customization]
 
