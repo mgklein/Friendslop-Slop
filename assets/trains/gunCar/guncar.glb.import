@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c1mfpcjuxg1mv"
-path="res://.godot/imported/trainengine.glb-b359579985f2cb6d54c6e02c98119b95.scn"
+uid="uid://cy3uej2n3rs35"
+path="res://.godot/imported/guncar.glb-ca01026d8fcd5c95fbd95e2e77131d34.scn"
 
 [deps]
 
-source_file="res://assets/trains/trainengine.glb"
-dest_files=["res://.godot/imported/trainengine.glb-b359579985f2cb6d54c6e02c98119b95.scn"]
+source_file="res://assets/trains/gunCar/guncar.glb"
+dest_files=["res://.godot/imported/guncar.glb-ca01026d8fcd5c95fbd95e2e77131d34.scn"]
 
 [params]
 

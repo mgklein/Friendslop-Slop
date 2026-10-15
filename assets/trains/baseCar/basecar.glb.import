@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cmd1dmi0jb0d6"
-path="res://.godot/imported/basecar.glb-cdd45f3efb8bb3e32d803b234b0291e3.scn"
+uid="uid://y04jq62lg6cr"
+path="res://.godot/imported/basecar.glb-45662fe46ccfb7aaf55f00e01efb2f39.scn"
 
 [deps]
 
-source_file="res://assets/trains/basecar.glb"
-dest_files=["res://.godot/imported/basecar.glb-cdd45f3efb8bb3e32d803b234b0291e3.scn"]
+source_file="res://assets/trains/baseCar/basecar.glb"
+dest_files=["res://.godot/imported/basecar.glb-45662fe46ccfb7aaf55f00e01efb2f39.scn"]
 
 [params]
 

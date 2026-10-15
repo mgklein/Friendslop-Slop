@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biu58ltkt48h2"
-path.s3tc="res://.godot/imported/guncar_guntexture.png-0f95cdc842a0e002daabdc201a2c8c1f.s3tc.ctex"
+uid="uid://b58fs05kb47fx"
+path.s3tc="res://.godot/imported/guncar_CabSides Base Color.png-c7da1e83192dd7263c906c1fad31a773.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "81d071da6299dbc1a9fca7430fe40989"
+"md5": "83872c35c150dad14993c5c952dfdd75"
 }
 
 [deps]
 
-source_file="res://assets/trains/guncar_guntexture.png"
-dest_files=["res://.godot/imported/guncar_guntexture.png-0f95cdc842a0e002daabdc201a2c8c1f.s3tc.ctex"]
+source_file="res://assets/trains/gunCar/guncar_CabSides Base Color.png"
+dest_files=["res://.godot/imported/guncar_CabSides Base Color.png-c7da1e83192dd7263c906c1fad31a773.s3tc.ctex"]
 
 [params]
 

@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://djta687bgvbh"]
 
-[ext_resource type="PackedScene" uid="uid://cmd1dmi0jb0d6" path="res://assets/trains/basecar.glb" id="1_18cna"]
+[ext_resource type="PackedScene" uid="uid://y04jq62lg6cr" path="res://assets/trains/baseCar/basecar.glb" id="1_18cna"]
 
-[node name="basecar" unique_id=670586679 instance=ExtResource("1_18cna")]
+[node name="basecar" unique_id=1313107202 instance=ExtResource("1_18cna")]

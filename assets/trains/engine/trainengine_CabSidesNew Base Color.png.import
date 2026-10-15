@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crurnlc6nniv1"
-path.s3tc="res://.godot/imported/trainengine_Lantern Base Color.png-b116179e74e304bf8f54e5c2b3fdfa9d.s3tc.ctex"
+uid="uid://b54vh6cv0rp65"
+path.s3tc="res://.godot/imported/trainengine_CabSidesNew Base Color.png-8b5b0deeb7a67a762913c6c45f9f0f81.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "e1b66633c6cbac3f3596ad6a8d7dd54e"
+"md5": "86851b26db91be7002ae4cdfee4e5c52"
 }
 
 [deps]
 
-source_file="res://assets/trains/trainengine_Lantern Base Color.png"
-dest_files=["res://.godot/imported/trainengine_Lantern Base Color.png-b116179e74e304bf8f54e5c2b3fdfa9d.s3tc.ctex"]
+source_file="res://assets/trains/engine/trainengine_CabSidesNew Base Color.png"
+dest_files=["res://.godot/imported/trainengine_CabSidesNew Base Color.png-8b5b0deeb7a67a762913c6c45f9f0f81.s3tc.ctex"]
 
 [params]
 
