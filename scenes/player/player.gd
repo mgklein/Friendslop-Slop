@@ -2,8 +2,6 @@ class_name Player
 extends CharacterBody3D
 
 
-signal update_train_direction
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -43,7 +41,7 @@ func _ready() -> void:
 		set_physics_process(false)
 		canvas_layer.hide()
 		return
-	
+	# Now guaranteed to be multiplayer authority
 	if Global.username: nameplate.text = Global.username
 	
 	label_session.text = Network.tube_client.session_id
@@ -52,9 +50,6 @@ func _ready() -> void:
 	button_leave.pressed.connect(func(): Network.leave_server())
 	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
-	await get_tree().process_frame
-	update_train_direction.connect(Global.level.on_update_train_direction)
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
@@ -77,13 +72,13 @@ func _process(_delta: float) -> void:
 		shoot()
 	
 	if Input.is_action_just_pressed("train_forward"):
-		update_train_direction.emit(1)
+		rpc("sync_train_direction", 1)
 	if Input.is_action_just_pressed("train_reverse"):
-		update_train_direction.emit(-1)
+		rpc("sync_train_direction", -1)
 	if Input.is_action_just_released("train_forward"):
-		update_train_direction.emit(0)
+		rpc("sync_train_direction", 0)
 	if Input.is_action_just_released("train_reverse"):
-		update_train_direction.emit(0)
+		rpc("sync_train_direction", 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -147,3 +142,8 @@ func register_hit(is_dead = false):
 	hit_marker.show()
 	await get_tree().create_timer(0.2).timeout
 	hit_marker.hide()
+
+
+@rpc("any_peer", "call_local", "reliable")
+func sync_train_direction(dir: int):
+	Global.train_direction_updated.emit(dir)

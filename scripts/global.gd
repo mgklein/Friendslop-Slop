@@ -1,6 +1,8 @@
 extends Node
 
 
+signal train_direction_updated(dir: int)
+
 var username := ""
 
 var level: Node3D

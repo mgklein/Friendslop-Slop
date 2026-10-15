@@ -21,6 +21,7 @@ func _ready() -> void:
 	Global.spawn_container = spawn_container
 	
 	timer_target.timeout.connect(spawn_target)
+	Global.train_direction_updated.connect(on_train_direction_updated)
 
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +35,7 @@ func spawn_target():
 		spawn_container.add_child(new_target, true)
 
 
-func on_update_train_direction(dir: int):
+func on_train_direction_updated(dir: int):
 	target_train_speed = train_speed * dir
 
 
