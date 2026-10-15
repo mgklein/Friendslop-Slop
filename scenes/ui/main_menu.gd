@@ -12,6 +12,7 @@ extends CanvasLayer
 
 const WORLD_FOREST = preload("uid://tb21kw5g8pwt")
 const PLAYER = preload("res://scenes/player/player.tscn")
+const WORLD_TRACK = preload("uid://17nxn1glan6p")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,7 +46,7 @@ func on_join():
 
 
 func add_world():
-	var new_world = WORLD_FOREST.instantiate()
+	var new_world = WORLD_TRACK.instantiate()
 	get_tree().current_scene.add_child(new_world)
 	hide()
 

@@ -2,6 +2,8 @@ class_name Player
 extends CharacterBody3D
 
 
+signal update_train_direction
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -50,6 +52,8 @@ func _ready() -> void:
 	button_leave.pressed.connect(func(): Network.leave_server())
 	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
+	await get_tree().process_frame
+	update_train_direction.connect(Global.level.on_update_train_direction)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -71,6 +75,15 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+	
+	if Input.is_action_just_pressed("train_forward"):
+		update_train_direction.emit(1)
+	if Input.is_action_just_pressed("train_reverse"):
+		update_train_direction.emit(-1)
+	if Input.is_action_just_released("train_forward"):
+		update_train_direction.emit(0)
+	if Input.is_action_just_released("train_reverse"):
+		update_train_direction.emit(0)
 
 
 func _physics_process(delta: float) -> void:
