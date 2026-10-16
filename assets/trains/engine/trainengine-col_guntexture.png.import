@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds8erk2iu72e2"
-path.s3tc="res://.godot/imported/trainengine_CabSides Base Color.png-8e1f784e66f3e9cc8fe230eea8146b24.s3tc.ctex"
+uid="uid://nm6twsdh6son"
+path.s3tc="res://.godot/imported/trainengine-col_guntexture.png-d8103988da3858910bf3addaa5a22648.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "83872c35c150dad14993c5c952dfdd75"
+"md5": "81d071da6299dbc1a9fca7430fe40989"
 }
 
 [deps]
 
-source_file="res://assets/trains/engine/trainengine_CabSides Base Color.png"
-dest_files=["res://.godot/imported/trainengine_CabSides Base Color.png-8e1f784e66f3e9cc8fe230eea8146b24.s3tc.ctex"]
+source_file="res://assets/trains/engine/trainengine-col_guntexture.png"
+dest_files=["res://.godot/imported/trainengine-col_guntexture.png-d8103988da3858910bf3addaa5a22648.s3tc.ctex"]
 
 [params]
 
