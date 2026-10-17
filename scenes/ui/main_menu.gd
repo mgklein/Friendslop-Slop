@@ -11,7 +11,7 @@ extends CanvasLayer
 @onready var tube_menu: VBoxContainer = %TubeMenu
 
 const WORLD_FOREST = preload("uid://tb21kw5g8pwt")
-const PLAYER = preload("res://scenes/player/player.tscn")
+const PLAYER = preload("uid://d1w5ccem33kle")
 const WORLD_TRACK = preload("uid://17nxn1glan6p")
 
 
