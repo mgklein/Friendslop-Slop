@@ -1,8 +1,5 @@
 [gd_scene format=3 uid="uid://dj5t0cvmha4y"]
 
-[ext_resource type="PackedScene" uid="uid://b5rwl1bi02lpx" path="res://assets/trains/engine/trainengine-col.glb" id="1_pet8h"]
+[ext_resource type="PackedScene" uid="uid://dtvqeybt0rq4p" path="res://assets/trains/engine/trainengine-col.glb" id="1_pet8h"]
 
-[node name="trainengine-col" unique_id=99925473 instance=ExtResource("1_pet8h")]
-
-[node name="Trainbase" parent="." index="0" unique_id=137100359]
-transform = Transform3D(1, 0, 0, 0, 0.9999574, -0.009234338, 0, 0.009234338, 0.9999574, 0, 0, 0)
+[node name="trainengine-col" unique_id=1190872393 instance=ExtResource("1_pet8h")]

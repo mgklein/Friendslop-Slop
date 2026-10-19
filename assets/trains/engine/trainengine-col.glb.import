@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b5rwl1bi02lpx"
+uid="uid://dtvqeybt0rq4p"
 path="res://.godot/imported/trainengine-col.glb-ec9d7c86186ff72624fcfc2f7c7a872b.scn"
 
 [deps]
@@ -35,7 +35,7 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path=""
+import_script/path="uid://dwbm13dvv8c1m"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
