@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://kwhmlfkni0u3"]
 
-[ext_resource type="PackedScene" uid="uid://cy3uej2n3rs35" path="res://assets/trains/gunCar/guncar.glb" id="1_6jyqf"]
+[ext_resource type="PackedScene" uid="uid://d1nipnd1tbytx" path="res://assets/weapons/gunemplacement.glb" id="1_mbfxs"]
+[ext_resource type="PackedScene" uid="uid://djta687bgvbh" path="res://scenes/trains/basecar.tscn" id="2_j15ji"]
 
-[node name="guncar" unique_id=130696092 instance=ExtResource("1_6jyqf")]
+[node name="Node3D" type="Node3D" unique_id=954259024]
+
+[node name="gunemplacement" parent="." unique_id=900877788 instance=ExtResource("1_mbfxs")]
+
+[node name="basecar" parent="." unique_id=2099254054 instance=ExtResource("2_j15ji")]

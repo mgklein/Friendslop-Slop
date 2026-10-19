@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b54vh6cv0rp65"
-path.s3tc="res://.godot/imported/trainengine_CabSidesNew Base Color.png-8b5b0deeb7a67a762913c6c45f9f0f81.s3tc.ctex"
+uid="uid://bn4own63fbyp"
+path.s3tc="res://.godot/imported/trainengine-col_CabSidesNew Base Color.png-87198921b649795515449199e9270b2b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/trains/engine/trainengine_CabSidesNew Base Color.png"
-dest_files=["res://.godot/imported/trainengine_CabSidesNew Base Color.png-8b5b0deeb7a67a762913c6c45f9f0f81.s3tc.ctex"]
+source_file="res://assets/trains/engine/trainengine-col_CabSidesNew Base Color.png"
+dest_files=["res://.godot/imported/trainengine-col_CabSidesNew Base Color.png-87198921b649795515449199e9270b2b.s3tc.ctex"]
 
 [params]
 
