@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dmtbw4gyydpei"]
+
+[ext_resource type="Script" uid="uid://cxhh0okgb45wh" path="res://scenes/system/game_controller.gd" id="1_bvk2m"]
+[ext_resource type="PackedScene" uid="uid://i8c14jrjxiq8" path="res://scenes/ui/main_menu.tscn" id="1_mgb3u"]
+[ext_resource type="Script" uid="uid://qpacgbnv25iw" path="res://scenes/system/pause_manager.gd" id="2_6aore"]
+[ext_resource type="Script" uid="uid://ccb4xq3iy5e82" path="res://scenes/system/game_over_manager.gd" id="3_i0w0i"]
+[ext_resource type="Script" uid="uid://dhpb36jiunqi2" path="res://scenes/system/transition_controller.gd" id="4_q6206"]
+[ext_resource type="PackedScene" uid="uid://b4hqgbp8qld0y" path="res://scenes/system/transition_controller.tscn" id="5_6aore"]
+
+[node name="GameController" type="Node" unique_id=1550936618 node_paths=PackedStringArray("level", "hud", "menu", "transition_controller")]
+script = ExtResource("1_bvk2m")
+level = NodePath("Level")
+hud = NodePath("HUD")
+menu = NodePath("Menu")
+transition_controller = NodePath("TransitionController")
+
+[node name="Managers" type="Node" parent="." unique_id=1583284034]
+
+[node name="PauseManager" type="Node" parent="Managers" unique_id=1168095990]
+script = ExtResource("2_6aore")
+
+[node name="GameOverManager" type="Node" parent="Managers" unique_id=1862268764]
+script = ExtResource("3_i0w0i")
+
+[node name="Level" type="Node3D" parent="." unique_id=1833731324]
+
+[node name="Menu" type="Control" parent="." unique_id=194683160]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainMenu" parent="Menu" unique_id=329637371 instance=ExtResource("1_mgb3u")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1238628640]
+
+[node name="TransitionController" parent="." unique_id=825712494 instance=ExtResource("5_6aore")]
+script = ExtResource("4_q6206")

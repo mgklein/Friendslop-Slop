@@ -1,4 +1,4 @@
-class_name Player
+class_name PlayerController
 extends CharacterBody3D
 
 
@@ -8,15 +8,8 @@ const JUMP_VELOCITY = 4.5
 @export var sensitivity: float = 0.002
 
 @onready var camera_3d: Camera3D = %Camera3D
-@onready var head: Node3D = %Head
+@onready var camera_controller: Node3D = %CameraController
 @onready var nameplate: Label3D = $Nameplate
-
-@onready var menu: Control = %Menu
-@onready var button_leave: Button = %ButtonLeave
-@onready var label_session: Label = %LabelSession
-@onready var button_copy_session: Button = %ButtonCopySession
-
-@onready var canvas_layer: CanvasLayer = %CanvasLayer
 @onready var hit_marker: Label = %HitMarker
 
 @onready var sound_hit: AudioStreamPlayer = %SoundHit
@@ -31,7 +24,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	menu.hide()
 	add_to_group("Players")
 	nameplate.text = name
 	hit_marker.hide()
@@ -39,32 +31,17 @@ func _ready() -> void:
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
-		canvas_layer.hide()
 		return
 	# Now guaranteed to be multiplayer authority
+
+	Global.game_controller.player_controller = self
 	if Global.username: nameplate.text = Global.username
-	
-	label_session.text = Network.tube_client.session_id
 	camera_3d.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	button_leave.pressed.connect(func(): Network.leave_server())
-	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_multiplayer_authority():
-		return
-	
-	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * sensitivity)
-		camera_3d.rotate_x(-event.relative.y * sensitivity)
-		camera_3d.rotation.x = clamp(camera_3d.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("menu"):
-		open_menu(menu.visible)
-	
 	if immobile:
 		return
 	
@@ -93,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if immobile:
 		direction = Vector3.ZERO
@@ -108,14 +85,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func open_menu(current_visibility: bool):
-	menu.visible = !current_visibility
-	
-	immobile = menu.visible
-	if menu.visible:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func update_rotation(rotation_input) -> void:
+	global_transform.basis = Basis.from_euler(rotation_input)
 
 
 func shoot():

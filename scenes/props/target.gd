@@ -11,7 +11,7 @@ func _ready() -> void:
 func take_damage(damage: int, source: int):
 	var next_health = health - damage
 	
-	var player_to_notify: Player
+	var player_to_notify: PlayerController
 	for current_player in get_tree().get_nodes_in_group("Players"):
 		player_to_notify = current_player
 		break

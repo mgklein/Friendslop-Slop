@@ -5,6 +5,7 @@ signal train_direction_updated(dir: int)
 
 var username := ""
 
+var game_controller: GameController
 var level: Node3D
 var spawn_container: Node3D
 
