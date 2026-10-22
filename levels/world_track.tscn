@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bbbg3aln5nvj0" path="res://levels/world_track.gd" id="1_g1nld"]
 [ext_resource type="Texture2D" uid="uid://bgk2vdhq7k5r1" path="res://assets/textures/kenney_prototype-textures/Vector/texture_08.svg" id="2_i12qg"]
 [ext_resource type="Texture2D" uid="uid://cto4joicucntt" path="res://assets/textures/kenney_prototype-textures/PNG/Green/texture_09.png" id="3_bwyfg"]
-[ext_resource type="PackedScene" uid="uid://dj5t0cvmha4y" path="res://scenes/trains/trainengine.tscn" id="4_i12qg"]
+[ext_resource type="PackedScene" uid="uid://djta687bgvbh" path="res://scenes/trains/basecar.tscn" id="5_6aw5u"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bhunq"]
 
@@ -14,7 +14,7 @@ uv1_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_riqys"]
 material = SubResource("StandardMaterial3D_v53yp")
-size = Vector2(50, 50)
+size = Vector2(100, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_riqys"]
 albedo_texture = ExtResource("3_bwyfg")
@@ -41,40 +41,10 @@ properties/0/path = NodePath(".:progress")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_riqys"]
-plane = Plane(1, 0, 0, 0)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_sn0t7"]
-size = Vector2(50, 5)
-orientation = 0
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3pli8"]
-plane = Plane(-1, 0, 0, 0)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1o1l2"]
-flip_faces = true
-size = Vector2(50, 5)
-orientation = 0
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_j6fc8"]
-plane = Plane(0, 0, 1, 0)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_0wskc"]
-size = Vector2(50, 5)
-orientation = 2
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dxoa6"]
-plane = Plane(0, 0, -1, 0)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_bpyjm"]
-flip_faces = true
-size = Vector2(50, 5)
-orientation = 2
-
 [sub_resource type="Curve3D" id="Curve3D_bwyfg"]
 closed = true
 _data = {
-"points": PackedVector3Array(-0.9633026, 0, -1.926609, 0.9633026, 0, 1.926609, 3.3265953, 0, -19.28931, -1.6226101, 0, -4.684506, 1.6226101, 0, 4.684506, 2.6768112, 0, -6.3119707, -0.75505066, 0, -4.3208537, 0.75505066, 0, 4.3208537, 18.539349, 0, 0.69399023, 0.22762871, 0, -2.6955495, -0.22762871, 0, 2.6955495, 18.208878, 0, 8.889634, 2.0578003, 0, -2.0779266, -2.0578003, 0, 2.0779266, 16.159966, 0, 19.72904, 3.383566, 0, 3.7354546, -3.383566, 0, -3.7354546, 6.5763474, 0, 20.984823, 5.2311034, 0, 2.0729465, -5.2311034, 0, -2.0729465, -8.757446, 0, 19.53076, 2.2167072, 0, 3.8280172, -2.2167072, 0, -3.8280172, -16.22606, 0, 12.789174, 0.6295433, 0, 3.7790508, -0.6295433, 0, -3.7790508, -18.605442, 0, 5.1883745, -1.9050426, 0, 3.8610291, 1.9050426, 0, -3.8610291, -18.737629, 0, -8.757447, -1.9399261, 0, 1.2779837, 1.9399261, 0, -1.2779837, -13.516209, 0, -14.83809, -3.7907505, 0, 1.4882584, 3.7907505, 0, -1.4882584, -5.12228, 0, -18.73763),
+"points": PackedVector3Array(-5.8832626, 0, 0.058597565, 5.8832626, 0, -0.058597565, 3.3265953, 0, -40.198074, -4.7994843, 0, -2.6923943, 4.7994843, 0, 2.6923943, 27.70544, 0, -35.691303, -0.75505066, 0, -4.3208537, 0.75505066, 0, 4.3208537, 39.894627, 0, 0.69399023, 3.3583984, 0, -2.816721, -3.3583984, 0, 2.816721, 28.16763, 0, 14.0734625, 3.0333939, 0, -1.4083652, -3.0333939, 0, 1.4083652, 17.334072, 0, 19.923586, 5.7092857, 0, 0.08621788, -5.7092857, 0, -0.08621788, 6.5763474, 0, 20.984823, 7.041813, 0, 0.3250084, -7.041813, 0, -0.3250084, -10.183159, 0, 21.115276, 5.958458, 0, 2.3833847, -5.958458, 0, -2.3833847, -25.566807, 0, 19.165237, 0.97501755, 0, 3.0333953, -0.97501755, 0, -3.0333953, -37.440826, 0, 6.9680076, -1.9050426, 0, 3.8610291, 1.9050426, 0, -3.8610291, -42.463116, 0, -8.757447, -3.2500648, 0, 3.3584023, 3.2500648, 0, -3.3584023, -32.56048, 0, -27.809967, -3.7907505, 0, 1.4882584, 3.7907505, 0, -1.4882584, -11.471369, 0, -39.32139),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 12
@@ -154,38 +124,11 @@ unique_name_in_owner = true
 wait_time = 5.0
 autostart = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=769379621]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=788188671]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 0)
-shape = SubResource("WorldBoundaryShape3D_riqys")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=507337532]
-mesh = SubResource("PlaneMesh_sn0t7")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=837155212]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
-shape = SubResource("WorldBoundaryShape3D_3pli8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D2" unique_id=1458581948]
-mesh = SubResource("PlaneMesh_1o1l2")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1209589246]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
-shape = SubResource("WorldBoundaryShape3D_j6fc8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D3" unique_id=1258781018]
-mesh = SubResource("PlaneMesh_0wskc")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" unique_id=1526922815]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
-shape = SubResource("WorldBoundaryShape3D_dxoa6")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D4" unique_id=543480135]
-mesh = SubResource("PlaneMesh_bpyjm")
-
 [node name="Track" type="Path3D" parent="." unique_id=881210554]
 curve = SubResource("Curve3D_bwyfg")
+
+[node name="basecar" parent="Track" unique_id=2099254054 instance=ExtResource("5_6aw5u")]
+transform = Transform3D(-0.00995934, 0, 0.9999354, 0, 1, 0, -0.9999354, 0, -0.00995934, 3.0904112, 3, -39.713707)
 
 [node name="Base" type="CSGPolygon3D" parent="Track" unique_id=1260401792]
 polygon = PackedVector2Array(-1, 0, -0.8, 0.2, 0.8, 0.2, 1, 0)
@@ -231,7 +174,8 @@ path_joined = true
 
 [node name="TrackProgress" type="PathFollow3D" parent="Track" unique_id=43873482]
 unique_name_in_owner = true
-transform = Transform3D(-0.8944166, 0, -0.4472074, 0, 1, 0, 0.4472074, 0, -0.8944166, 3.3265953, 0, -19.28931)
+transform = Transform3D(0.009959222, 0, -0.9999355, 0, 1, 0, 0.9999355, 0, 0.009959222, 3.3265953, 0, -40.198074)
 
-[node name="trainengine" parent="Track/TrackProgress" unique_id=1415664588 instance=ExtResource("4_i12qg")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3, 0)
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Track/TrackProgress" unique_id=1301432517]
+transform = Transform3D(-0.9999999, 0, -1.1920929e-07, 0, 1, 0, 1.1920929e-07, 0, -0.9999999, 0.482, 3, 0.241)
+remote_path = NodePath("../../basecar")

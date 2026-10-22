@@ -83,7 +83,8 @@ func leave_server():
 func clean_up_signals():
 	multiplayer.peer_connected.disconnect(add_player)
 	multiplayer.peer_disconnected.disconnect(remove_player)
-	multiplayer.connected_to_server.disconnect(on_connected_to_server)
+	if multiplayer.connected_to_server.is_connected(on_connected_to_server):
+		multiplayer.connected_to_server.disconnect(on_connected_to_server)
 
 
 func _exit_tree() -> void:
