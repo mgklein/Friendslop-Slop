@@ -29,12 +29,12 @@ data = PackedVector3Array(0, 4.9154997, 0.5, 0.049, 4.9154997, 0.4976, 0, 2.9492
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sn0t7"]
 
-[sub_resource type="Sky" id="Sky_riqys"]
+[sub_resource type="Sky" id="Sky_n1h02"]
 sky_material = SubResource("ProceduralSkyMaterial_sn0t7")
 
 [sub_resource type="Environment" id="Environment_bhunq"]
 background_mode = 2
-sky = SubResource("Sky_riqys")
+sky = SubResource("Sky_n1h02")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i12qg"]
 properties/0/path = NodePath(".:progress")

@@ -13,6 +13,7 @@ extends CanvasLayer
 const WORLD_FOREST = "uid://tb21kw5g8pwt"
 #const PLAYER = preload("uid://d1w5ccem33kle")
 const WORLD_TRACK = "uid://17nxn1glan6p"
+const WORLD_PROCEDURAL = "uid://ppc40eff8d81"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -46,7 +47,7 @@ func on_join():
 
 
 func add_world():
-	Global.game_controller.change_level_scene(WORLD_TRACK)
+	Global.game_controller.change_level_scene(WORLD_PROCEDURAL)
 	hide()
 
 
