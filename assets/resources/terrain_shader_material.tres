@@ -22,6 +22,6 @@ as_normal_map = true
 [resource]
 render_priority = 0
 shader = ExtResource("1_dsvjl")
-shader_parameter/height = 40.0
+shader_parameter/height = 8.0
 shader_parameter/color_gradient = SubResource("GradientTexture1D_rgvmi")
 shader_parameter/normal_map = SubResource("NoiseTexture2D_livqk")
