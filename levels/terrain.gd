@@ -1,7 +1,7 @@
 @tool
 extends MeshInstance3D
 
-const size := 256.0
+const size := 100.0
 
 @export_range(4, 256, 4) var resolution := 32:
 	set(new_resolution):
