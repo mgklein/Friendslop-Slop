@@ -5,4 +5,4 @@
 [node name="trainengine-test" unique_id=1894381573 instance=ExtResource("1_pet8h")]
 
 [node name="Enginelever-cycolshape" parent="." index="15" unique_id=1829631181]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -0.5200144, -0.8324126, -5.3267307)
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -0.5200144, -0.8324126, -5.3267307)
