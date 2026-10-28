@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://ds53yd6r5wq3c"]
 
 [ext_resource type="PackedScene" uid="uid://dj5t0cvmha4y" path="res://scenes/trains/trainengine.tscn" id="1_ihb1j"]
+[ext_resource type="PackedScene" uid="uid://kwhmlfkni0u3" path="res://scenes/trains/guncar.tscn" id="2_xhxpv"]
+[ext_resource type="PackedScene" uid="uid://djta687bgvbh" path="res://scenes/trains/basecar.tscn" id="3_1yg6a"]
 
 [node name="Node3D" type="Node3D" unique_id=549289914]
 
 [node name="trainengine-col" parent="." unique_id=99925473 instance=ExtResource("1_ihb1j")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1567910142]
-transform = Transform3D(0.74928665, -0.2796773, 0.60029167, -0.24954605, 0.720393, 0.64711726, -0.6134299, -0.63467675, 0.46998852, 4.0641675, 4.930618, 4.811983)
+transform = Transform3D(0.74928665, -0.2796773, 0.60029167, -0.24954605, 0.720393, 0.64711726, -0.6134299, -0.63467675, 0.4699885, 16.482132, 15.123756, 14.865168)
 
 [node name="trainengine-col2" parent="." unique_id=275162522 instance=ExtResource("1_ihb1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.413956, 0, 0.61827683)
@@ -17,3 +19,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.035281, 0, -3.3968403)
 
 [node name="trainengine-col4" parent="." unique_id=130009916 instance=ExtResource("1_ihb1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3605909, 0, -12.7725)
+
+[node name="trainengine-col5" parent="." unique_id=1190872393 instance=ExtResource("1_ihb1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.983754, 0, 14.847729)
+
+[node name="Node3D" parent="." unique_id=954259024 instance=ExtResource("2_xhxpv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.02382, 0, 17.1243)
+
+[node name="Node3D2" parent="." unique_id=746370864 instance=ExtResource("2_xhxpv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.995269, 0, -19.511017)
+
+[node name="basecar" parent="." unique_id=2099254054 instance=ExtResource("3_1yg6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6035347, -9.536743e-07, -14.910234)
