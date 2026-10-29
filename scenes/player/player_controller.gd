@@ -2,12 +2,32 @@ class_name PlayerController
 extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+@export var debug: bool = false
+@export_category("References")
+@export var state_chart: StateChart
+@export var standing_collision: CollisionShape3D
+@export var crouching_collision: CollisionShape3D
+@export var crouch_check: ShapeCast3D
+@export var interaction_raycast: RayCast3D
+@export_category("Movement Settings")
+@export_group("Easing")
+@export var acceleration: float = 0.2
+@export var deceleration: float = 0.5
+@export_group("Speed")
+@export var default_speed: float = 7.0
+@export var sprint_speed: float = 3.0
+@export var crouch_speed: float = -5.0
+@export_category("Jump Settings")
+@export var jump_velocity: float = 7.0
 
-@export var sensitivity: float = 0.002
 
-@onready var camera_3d: Camera3D = %Camera3D
+var _input_dir: Vector2 = Vector2.ZERO
+var _movement_velocity: Vector3 = Vector3.ZERO
+var sprint_modifier: float = 0.0
+var crouch_modifier: float = 0.0
+var speed: float = 0.0
+
+@onready var camera: Camera3D = %Camera3D
 @onready var camera_controller: Node3D = %CameraController
 @onready var nameplate: Label3D = $Nameplate
 @onready var hit_marker: Label = %HitMarker
@@ -36,7 +56,7 @@ func _ready() -> void:
 
 	Global.game_controller.player_controller = self
 	if Global.username: nameplate.text = Global.username
-	camera_3d.current = true
+	camera.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
 
@@ -63,30 +83,57 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	var speed_modifier = sprint_modifier + crouch_modifier
+	speed = default_speed + speed_modifier
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var direction := (global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	_input_dir = Input.get_vector("left", "right", "forward", "backward")
+	var current_velocity = Vector2(_movement_velocity.x, _movement_velocity.z)
+	var direction = (transform.basis * Vector3(_input_dir.x, 0, _input_dir.y)).normalized()
 	
 	if immobile:
 		direction = Vector3.ZERO
 	
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		current_velocity = lerp(current_velocity, Vector2(direction.x, direction.z) * speed, acceleration)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		current_velocity = current_velocity.move_toward(Vector2.ZERO, deceleration)
+	
+	_movement_velocity = Vector3(current_velocity.x, velocity.y, current_velocity.y)
+	velocity = _movement_velocity
+	
+	# Handle jump.
+	#if Input.is_action_just_pressed("jump") and is_on_floor():
+		#velocity.y = JUMP_VELOCITY
 
 	move_and_slide()
 
 
 func update_rotation(rotation_input) -> void:
 	global_transform.basis = Basis.from_euler(rotation_input)
+
+
+func sprint() -> void:
+	sprint_modifier = sprint_speed
+
+
+func walk() -> void:
+	sprint_modifier = 0.0
+
+
+func stand() -> void:
+	crouch_modifier = 0.0
+	standing_collision.disabled = false
+	crouching_collision.disabled = true
+
+
+func crouch() -> void:
+	crouch_modifier = crouch_speed
+	standing_collision.disabled = true
+	crouching_collision.disabled = false
+
+
+func jump() -> void:
+	velocity.y += jump_velocity
 
 
 func shoot():
@@ -98,8 +145,8 @@ func shoot():
 
 func get_shoot_direction():
 	var viewport_rect = get_viewport().get_visible_rect().size
-	var raycast_start = camera_3d.project_ray_origin(viewport_rect / 2)
-	var raycast_end = raycast_start + camera_3d.project_ray_normal(viewport_rect / 2) * 200
+	var raycast_start = camera.project_ray_origin(viewport_rect / 2)
+	var raycast_end = raycast_start + camera.project_ray_normal(viewport_rect / 2) * 200
 	return (raycast_end - raycast_start).normalized()
 
 

@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cf1kvccsjcm63"]
+
+[ext_resource type="Shader" uid="uid://ciuvedw314k77" path="res://assets/shaders/terrain.gdshader" id="1_dsvjl"]
+
+[sub_resource type="Gradient" id="Gradient_4rxmf"]
+offsets = PackedFloat32Array(0.004651163, 0.59534883, 0.6976744, 1)
+colors = PackedColorArray(0, 0.088848434, 0.5446755, 1, 0.3165759, 0.7990262, 0, 1, 0.6919974, 0.5099691, 3.3120483e-07, 1, 0.45629942, 0.57443464, 0.2412821, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rgvmi"]
+gradient = SubResource("Gradient_4rxmf")
+width = 512
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_42bs6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_livqk"]
+width = 1020
+height = 1024
+noise = SubResource("FastNoiseLite_42bs6")
+seamless = true
+as_normal_map = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dsvjl")
+shader_parameter/height = 40.0
+shader_parameter/color_gradient = SubResource("GradientTexture1D_rgvmi")
+shader_parameter/normal_map = SubResource("NoiseTexture2D_livqk")
