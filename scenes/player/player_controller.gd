@@ -68,6 +68,21 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 	
+	if Input.is_action_just_pressed("interact") and interaction_raycast.is_colliding():
+		var collider = interaction_raycast.get_collider()
+		var shape_index = interaction_raycast.get_collider_shape()
+		var shape_owner_id = collider.shape_find_owner(shape_index)
+		var collision_shape_node = collider.shape_owner_get_owner(shape_owner_id)
+		if collision_shape_node.name == "Enginelever-cycolshape":
+			print(rad_to_deg(collision_shape_node.rotation.x))
+			if abs(collision_shape_node.rotation.x - deg_to_rad(-45)) < 0.1:
+				collision_shape_node.rotation.x = deg_to_rad(45)
+				rpc("sync_train_direction", 1)
+			else:
+				collision_shape_node.rotation.x = deg_to_rad(-45)
+				rpc("sync_train_direction", 0)
+		
+	
 	if Input.is_action_just_pressed("train_forward"):
 		rpc("sync_train_direction", 1)
 	if Input.is_action_just_pressed("train_reverse"):
