@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://dj5t0cvmha4y"]
 
-[ext_resource type="PackedScene" uid="uid://dghipuafe7wb4" path="res://assets/trains/test/trainengine-test.glb" id="1_pet8h"]
+[ext_resource type="PackedScene" uid="uid://meacoml3awc1" path="res://assets/trains/test/trainengine-test.glb" id="1_pet8h"]
 
-[node name="trainengine-test" unique_id=1894381573 instance=ExtResource("1_pet8h")]
+[node name="trainengine-test" unique_id=1845770554 instance=ExtResource("1_pet8h")]
