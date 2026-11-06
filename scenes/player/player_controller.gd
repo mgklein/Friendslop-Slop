@@ -9,6 +9,7 @@ extends CharacterBody3D
 @export var crouching_collision: CollisionShape3D
 @export var crouch_check: ShapeCast3D
 @export var interaction_raycast: RayCast3D
+@export var standing_raycast: RayCast3D
 @export_category("Movement Settings")
 @export_group("Easing")
 @export var acceleration: float = 0.2
@@ -59,6 +60,7 @@ func _ready() -> void:
 	camera.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
+	platform_on_leave = CharacterBody3D.PLATFORM_ON_LEAVE_ADD_VELOCITY
 
 
 func _process(_delta: float) -> void:
