@@ -69,6 +69,11 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+		var players = get_tree().get_nodes_in_group("Players")
+		for i in len(players):
+			print("Player rot:",players[i].global_rotation_degrees)
+			print("Camera rot:",players[i].camera_controller.global_rotation_degrees)
+			print("Head rot:",players[i].camera_controller.get_node("Head").global_rotation_degrees)
 	
 	if Input.is_action_just_pressed("interact") and interaction_raycast.is_colliding():
 		var collider = interaction_raycast.get_collider()
