@@ -36,7 +36,7 @@ func update_camera_rotation(input: Vector2) -> void:
 	
 	transform.basis = Basis.from_euler(_camera_rotation)
 	#head.rotate_y(_rotation.y)
-	player_controller.update_rotation(_player_rotation)
+	player_controller.update_rotation(input.x)
 	
 	rotation.z = 0.0
 

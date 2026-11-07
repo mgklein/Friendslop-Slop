@@ -101,6 +101,8 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	#rotate_y(delta)
+	#print(rotation.y)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -131,7 +133,8 @@ func _physics_process(delta: float) -> void:
 
 
 func update_rotation(rotation_input) -> void:
-	global_transform.basis = Basis.from_euler(rotation_input)
+	rotate_y(rotation_input)
+	#global_transform.basis = Basis.from_euler(rotation_input)
 
 
 func sprint() -> void:
