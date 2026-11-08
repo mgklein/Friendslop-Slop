@@ -62,6 +62,9 @@ func _on_follow_state_physics_processing(delta: float) -> void:
 		var target_rotation = atan2(direction.x, direction.z)
 		rotation.y = lerp_angle(rotation.y, target_rotation, 5.0 * delta)
 
+func take_damage(damage, source):
+	health_component.take_damage(damage)
+	pass
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
