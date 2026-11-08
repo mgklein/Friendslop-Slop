@@ -18,5 +18,6 @@ func on_ball_hit(body: Node3D):
 
 	if body.has_method("take_damage"):
 		body.take_damage(10, source)
+		print("I damaged " + str(body))
 
 	queue_free()
