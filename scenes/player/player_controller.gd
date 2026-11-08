@@ -35,6 +35,7 @@ var speed: float = 0.0
 @onready var sound_hit: AudioStreamPlayer = %SoundHit
 @onready var sound_ping: AudioStreamPlayer = %SoundPing
 
+signal shoot_weapon
 
 var immobile := false
 
@@ -112,6 +113,7 @@ func update_rotation(rotation_input) -> void:
 	global_transform.basis = Basis.from_euler(rotation_input)
 
 
+
 func sprint() -> void:
 	sprint_modifier = sprint_speed
 
@@ -137,21 +139,13 @@ func jump() -> void:
 
 
 func shoot():
-	var force = 100
-	var pos = global_position
-	var shoot_dir = get_shoot_direction()
-	Global.shoot_ball.rpc_id(1, pos, shoot_dir, force)
+	shoot_weapon.emit() #upon shoot button press, send signal to weapon child node
 
-
-func get_shoot_direction():
-	var viewport_rect = get_viewport().get_visible_rect().size
-	var raycast_start = camera.project_ray_origin(viewport_rect / 2)
-	var raycast_end = raycast_start + camera.project_ray_normal(viewport_rect / 2) * 200
-	return (raycast_end - raycast_start).normalized()
 
 
 @rpc("any_peer", "call_local")
-func register_hit(is_dead = false):
+func register_hit(is_dead = false):#commenting this function out. Currently just returning
+	return
 	if is_dead:
 		sound_ping.play()
 	else:
@@ -165,3 +159,7 @@ func register_hit(is_dead = false):
 @rpc("any_peer", "call_local", "reliable")
 func sync_train_direction(dir: int):
 	Global.train_direction_updated.emit(dir)
+
+
+func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed): #From weapon child node, this is sent to the projectilehandler singleton
+	ProjectileHandler.shoot_ball.rpc_id(1, projectile_position,projectile_rotation, projectile_speed)

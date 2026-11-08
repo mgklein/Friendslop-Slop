@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapons" format=3 uid="uid://dbdq1fum4tksn"]
+
+[ext_resource type="PackedScene" uid="uid://fybawbkemhyf" path="res://scenes/weapons/ak_weapon.tscn" id="1_ktrwl"]
+[ext_resource type="Script" uid="uid://d3b4gr04a07yq" path="res://scenes/weapons/weapons.gd" id="1_lwh18"]
+[ext_resource type="PackedScene" uid="uid://dlsk78b4aki17" path="res://scenes/props/ball.tscn" id="2_bd6hg"]
+
+[resource]
+script = ExtResource("1_lwh18")
+name = &"AK"
+position = Vector3(0.29545242, 1.2838941, -0.5563968)
+rotation = Vector3(0, 180, 0)
+mesh = ExtResource("1_ktrwl")
+shootable = true
+projectile_speed = 50
+projectile_scene = ExtResource("2_bd6hg")
+metadata/_custom_type_script = "uid://d3b4gr04a07yq"

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dqj1qp7f6n06n"]
+
+[ext_resource type="Script" uid="uid://ctxpx7stc0dc7" path="res://scenes/weapons/init_weapon.gd" id="1_eo7p8"]
+[ext_resource type="PackedScene" uid="uid://fybawbkemhyf" path="res://scenes/weapons/ak_weapon.tscn" id="1_nqevj"]
+
+[node name="Weapon" type="Node3D" unique_id=207957914]
+script = ExtResource("1_eo7p8")
+
+[node name="AKWeapon" parent="." unique_id=628812095 instance=ExtResource("1_nqevj")]
+unique_name_in_owner = true

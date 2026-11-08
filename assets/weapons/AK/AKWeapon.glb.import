@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1nipnd1tbytx"
-path="res://.godot/imported/gunemplacement.glb-0a6a7ab564c2b9043ccbd64f2ef3a34d.scn"
+uid="uid://cvcjucjlvuu5e"
+path="res://.godot/imported/AKWeapon.glb-8b3d0ee586e7b04b80e340a11521ab06.scn"
 
 [deps]
 
-source_file="res://assets/weapons/gunemplacement.glb"
-dest_files=["res://.godot/imported/gunemplacement.glb-0a6a7ab564c2b9043ccbd64f2ef3a34d.scn"]
+source_file="res://assets/weapons/AK/AKWeapon.glb"
+dest_files=["res://.godot/imported/AKWeapon.glb-8b3d0ee586e7b04b80e340a11521ab06.scn"]
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
