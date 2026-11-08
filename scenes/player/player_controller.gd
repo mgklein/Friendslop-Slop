@@ -35,6 +35,7 @@ var speed: float = 0.0
 @onready var sound_hit: AudioStreamPlayer = %SoundHit
 @onready var sound_ping: AudioStreamPlayer = %SoundPing
 
+signal shoot_weapon
 
 var immobile := false
 
@@ -112,6 +113,7 @@ func update_rotation(rotation_input) -> void:
 	global_transform.basis = Basis.from_euler(rotation_input)
 
 
+
 func sprint() -> void:
 	sprint_modifier = sprint_speed
 
@@ -140,7 +142,8 @@ func shoot():
 	var force = 100
 	var pos = global_position
 	var shoot_dir = get_shoot_direction()
-	Global.shoot_ball.rpc_id(1, pos, shoot_dir, force)
+	#Global.shoot_ball.rpc_id(1, pos, shoot_dir, force)
+	shoot_weapon.emit()
 
 
 func get_shoot_direction():
@@ -151,7 +154,8 @@ func get_shoot_direction():
 
 
 @rpc("any_peer", "call_local")
-func register_hit(is_dead = false):
+func register_hit(is_dead = false):#commenting this function out. Currently just returning
+	return
 	if is_dead:
 		sound_ping.play()
 	else:
@@ -165,3 +169,7 @@ func register_hit(is_dead = false):
 @rpc("any_peer", "call_local", "reliable")
 func sync_train_direction(dir: int):
 	Global.train_direction_updated.emit(dir)
+
+
+func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed):
+	ProjectileHandler.shoot_ball.rpc_id(1, projectile_position,projectile_rotation, projectile_speed)
