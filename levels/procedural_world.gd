@@ -19,6 +19,7 @@ var current_train_speed: float = 0.0
 func _ready() -> void:
 	Global.level = self
 	Global.spawn_container = spawn_container
+	ProjectileHandler.spawn_container = spawn_container
 	
 	timer_target.timeout.connect(spawn_target)
 	Global.train_direction_updated.connect(on_train_direction_updated)
