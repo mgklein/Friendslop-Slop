@@ -5,7 +5,8 @@
 [ext_resource type="Script" uid="uid://cmvyxrg1i4cs1" path="res://levels/procedural_world.gd" id="1_jrco8"]
 [ext_resource type="PackedScene" uid="uid://c8i5pwk6r6ht1" path="res://scenes/props/placeholder_station.tscn" id="2_livqk"]
 [ext_resource type="Script" uid="uid://hy116vwidjrc" path="res://levels/track.gd" id="3_1drw7"]
-[ext_resource type="PackedScene" uid="uid://dj5t0cvmha4y" path="res://scenes/trains/trainengine.tscn" id="6_livqk"]
+[ext_resource type="PackedScene" uid="uid://dj5t0cvmha4y" path="res://scenes/trains/trainengine.tscn" id="5_jrco8"]
+[ext_resource type="Script" uid="uid://crbfpp0l3sl3x" path="res://scenes/trains/trainengine.gd" id="6_livqk"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_livqk"]
 _surfaces = [{
@@ -75,8 +76,9 @@ end_station = NodePath("../EndStation")
 meander_amplitude = 50.0
 noise_frequency = 0.01
 
-[node name="trainengine-test" parent="Track" unique_id=1845770554 instance=ExtResource("6_livqk")]
-transform = Transform3D(-0.71002614, -0.0040143314, 0.7041239, -0.006241746, 0.9999259, -0.0005928692, -0.704123, -0.004815925, -0.71002185, -26.446943, 4.653633, 32.70019)
+[node name="trainengine-test" parent="Track" unique_id=1894381573 instance=ExtResource("5_jrco8")]
+transform = Transform3D(-0.36234397, 0.010801476, 0.93196577, 4.5020243e-10, 0.99992543, -0.011588953, -0.9320283, -0.0041992813, -0.36231965, -43.459354, 1.6000996, -29.634096)
+script = ExtResource("6_livqk")
 
 [node name="Base" type="CSGPolygon3D" parent="Track" unique_id=1583938942]
 polygon = PackedVector2Array(-1, 0, -0.8, 0.2, 0.8, 0.2, 1, 0)

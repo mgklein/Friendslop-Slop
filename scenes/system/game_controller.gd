@@ -38,9 +38,9 @@ func change_level_scene(
 		elif keep_running:
 			current_level.visible = false # Keeps in memory and running
 		else:
-			level.remove_child(current_menu) # Keeps in memory, does not run
+			level.remove_child(current_level) # Keeps in memory, does not run
 	var new = load(new_scene).instantiate()
-	menu.add_child(new)
+	level.add_child(new)
 	current_level = new
 	if transition:
 		transition_controller.transition(transition_in, seconds) # Transition in
@@ -65,7 +65,7 @@ func change_hud_scene(
 		elif keep_running:
 			current_hud.visible = false # Keeps in memory and running
 		else:
-			hud.remove_child(current_menu) # Keeps in memory, does not run
+			hud.remove_child(current_hud) # Keeps in memory, does not run
 	var new = load(new_scene).instantiate()
 	hud.add_child(new)
 	current_hud = new

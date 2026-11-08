@@ -9,6 +9,7 @@ extends CharacterBody3D
 @export var crouching_collision: CollisionShape3D
 @export var crouch_check: ShapeCast3D
 @export var interaction_raycast: RayCast3D
+@export var standing_raycast: RayCast3D
 @export_category("Movement Settings")
 @export_group("Easing")
 @export var acceleration: float = 0.2
@@ -60,6 +61,7 @@ func _ready() -> void:
 	camera.current = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	DisplayServer.clipboard_set(Network.tube_client.session_id)
+	platform_on_leave = CharacterBody3D.PLATFORM_ON_LEAVE_ADD_VELOCITY
 
 
 func _process(_delta: float) -> void:
@@ -68,18 +70,36 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+		var players = get_tree().get_nodes_in_group("Players")
+		for i in len(players):
+			print("Player rot:",players[i].global_rotation_degrees)
+			print("Camera rot:",players[i].camera_controller.global_rotation_degrees)
+			print("Head rot:",players[i].camera_controller.get_node("Head").global_rotation_degrees)
 	
-	if Input.is_action_just_pressed("train_forward"):
-		rpc("sync_train_direction", 1)
-	if Input.is_action_just_pressed("train_reverse"):
-		rpc("sync_train_direction", -1)
-	if Input.is_action_just_released("train_forward"):
-		rpc("sync_train_direction", 0)
-	if Input.is_action_just_released("train_reverse"):
-		rpc("sync_train_direction", 0)
+	if Input.is_action_just_pressed("interact") and interaction_raycast.is_colliding():
+		var collider = interaction_raycast.get_collider()
+		var shape_index = interaction_raycast.get_collider_shape()
+		var shape_owner_id = collider.shape_find_owner(shape_index)
+		var collision_shape_node = collider.shape_owner_get_owner(shape_owner_id)
+		if collision_shape_node.name == "Enginelever-cycolshape":
+			rpc("sync_train_moving")
+		elif collision_shape_node.name == "Directionlever-cycolshape":
+			rpc("sync_train_direction")
+	
+	
+	#if Input.is_action_just_pressed("train_forward"):
+		#rpc("sync_train_direction", 1, 1)
+	#if Input.is_action_just_pressed("train_reverse"):
+		#rpc("sync_train_direction", -1, 1)
+	#if Input.is_action_just_released("train_forward"):
+		#rpc("sync_train_direction", 1, 0)
+	#if Input.is_action_just_released("train_reverse"):
+		#rpc("sync_train_direction", -1, 0)
 
 
 func _physics_process(delta: float) -> void:
+	#rotate_y(delta)
+	#print(rotation.y)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -110,7 +130,8 @@ func _physics_process(delta: float) -> void:
 
 
 func update_rotation(rotation_input) -> void:
-	global_transform.basis = Basis.from_euler(rotation_input)
+	rotate_y(rotation_input)
+	#global_transform.basis = Basis.from_euler(rotation_input)
 
 
 
@@ -157,8 +178,13 @@ func register_hit(is_dead = false):#commenting this function out. Currently just
 
 
 @rpc("any_peer", "call_local", "reliable")
-func sync_train_direction(dir: int):
-	Global.train_direction_updated.emit(dir)
+func sync_train_direction():
+	TrainController.update_train_direction.emit()
+
+
+@rpc("any_peer", "call_local", "reliable")
+func sync_train_moving():
+	TrainController.update_train_moving.emit()
 
 
 func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed): #From weapon child node, this is sent to the projectilehandler singleton
