@@ -29,7 +29,6 @@ func tube_join(session_id: String):
 	multiplayer.peer_disconnected.connect(remove_player)
 	multiplayer.connected_to_server.connect(on_connected_to_server)
 	tube_client.join_session(session_id)
-	#print("session id:", session_id)
 
 
 func start_server():

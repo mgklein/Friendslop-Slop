@@ -1,8 +1,6 @@
 extends Node
 
 
-signal train_direction_updated(dir: int)
-
 var username := ""
 
 var game_controller: GameController

@@ -81,23 +81,19 @@ func _process(_delta: float) -> void:
 		var shape_owner_id = collider.shape_find_owner(shape_index)
 		var collision_shape_node = collider.shape_owner_get_owner(shape_owner_id)
 		if collision_shape_node.name == "Enginelever-cycolshape":
-			print(rad_to_deg(collision_shape_node.rotation.x))
-			if abs(collision_shape_node.rotation.x - deg_to_rad(-45)) < 0.1:
-				collision_shape_node.rotation.x = deg_to_rad(45)
-				rpc("sync_train_direction", 1)
-			else:
-				collision_shape_node.rotation.x = deg_to_rad(-45)
-				rpc("sync_train_direction", 0)
-		
+			rpc("sync_train_moving")
+		elif collision_shape_node.name == "Directionlever-cycolshape":
+			rpc("sync_train_direction")
 	
-	if Input.is_action_just_pressed("train_forward"):
-		rpc("sync_train_direction", 1)
-	if Input.is_action_just_pressed("train_reverse"):
-		rpc("sync_train_direction", -1)
-	if Input.is_action_just_released("train_forward"):
-		rpc("sync_train_direction", 0)
-	if Input.is_action_just_released("train_reverse"):
-		rpc("sync_train_direction", 0)
+	
+	#if Input.is_action_just_pressed("train_forward"):
+		#rpc("sync_train_direction", 1, 1)
+	#if Input.is_action_just_pressed("train_reverse"):
+		#rpc("sync_train_direction", -1, 1)
+	#if Input.is_action_just_released("train_forward"):
+		#rpc("sync_train_direction", 1, 0)
+	#if Input.is_action_just_released("train_reverse"):
+		#rpc("sync_train_direction", -1, 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -188,5 +184,10 @@ func register_hit(is_dead = false):
 
 
 @rpc("any_peer", "call_local", "reliable")
-func sync_train_direction(dir: int):
-	Global.train_direction_updated.emit(dir)
+func sync_train_direction():
+	TrainController.update_train_direction.emit()
+
+
+@rpc("any_peer", "call_local", "reliable")
+func sync_train_moving():
+	TrainController.update_train_moving.emit()
