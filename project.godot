@@ -21,6 +21,7 @@ TileRunInstancesGlobal="*uid://b6fg6pu2bfi14"
 Network="*uid://cmacc0qaxcb7t"
 Global="*uid://g7esakolnc6k"
 TrainController="*uid://dupy5w205xhql"
+ProjectileHandler="*uid://caay4yiv56wif"
 
 [display]
 

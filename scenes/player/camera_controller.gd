@@ -26,6 +26,7 @@ func _process(_delta: float) -> void:
 	if not _lock_camera:
 		update_camera_rotation(component_mouse_capture.consume_mouse_input())
 
+
 func update_camera_rotation(input: Vector2) -> void:
 	_rotation.x += input.y
 	_rotation.y += input.x
@@ -33,7 +34,6 @@ func update_camera_rotation(input: Vector2) -> void:
 	
 	var _player_rotation = Vector3(0.0, _rotation.y, 0.0)
 	var _camera_rotation = Vector3(_rotation.x, 0.0, 0.0)
-	
 	transform.basis = Basis.from_euler(_camera_rotation)
 	#head.rotate_y(_rotation.y)
 	player_controller.update_rotation(input.x)

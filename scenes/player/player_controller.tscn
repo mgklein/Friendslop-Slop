@@ -25,6 +25,8 @@
 [ext_resource type="Script" uid="uid://daay44th5eobh" path="res://scenes/player/components/states/train_state.gd" id="17_rue81"]
 [ext_resource type="Script" uid="uid://skbeyyrfygfu" path="res://scenes/player/components/states/airborne_state.gd" id="18_cv1cy"]
 [ext_resource type="Script" uid="uid://i2pweqjli68m" path="res://scenes/player/components/states/crouching_state.gd" id="18_wpncg"]
+[ext_resource type="PackedScene" uid="uid://dqj1qp7f6n06n" path="res://scenes/weapons/weapon.tscn" id="23_aoka8"]
+[ext_resource type="Resource" uid="uid://dbdq1fum4tksn" path="res://assets/weapons/AK/AKWeapon.tres" id="24_2xfig"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_riqys"]
 radius = 0.1
@@ -48,7 +50,7 @@ height = 1.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8afob"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath("Nameplate:text")
 properties/1/spawn = true
 properties/1/replication_mode = 1
@@ -344,6 +346,11 @@ script = ExtResource("18_wpncg")
 
 [connection signal="state_physics_processing" from="StateChart/Root/Riding/Level" to="StateMachine/RidingState/LevelState" method="_on_level_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Riding/Train" to="StateMachine/RidingState/TrainState" method="_on_train_state_physics_processing"]
+[node name="Weapon" parent="." unique_id=207957914 instance=ExtResource("23_aoka8")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.29545242, 1.2838941, -0.5563968)
+WEAPON_TYPE = ExtResource("24_2xfig")
+
+[connection signal="shoot_weapon" from="." to="Weapon" method="_on_player_controller_shoot_weapon"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateMachine/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Idle" to="StateMachine/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving" to="StateMachine/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
@@ -356,3 +363,4 @@ script = ExtResource("18_wpncg")
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Standing" to="StateMachine/PostureState/StandingState" method="_on_standing_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_physics_processing"]
+[connection signal="projectile_info" from="Weapon" to="." method="_on_weapon_projectile_info"]

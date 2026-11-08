@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c8i5pwk6r6ht1"]
+
+[ext_resource type="Script" uid="uid://c0phan0yeq44f" path="res://scenes/props/placeholder_station.gd" id="1_qx8l0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhunq"]
+size = Vector3(20, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5hyx"]
+albedo_color = Color(0.20152658, 0.20152658, 0.20152658, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qx8l0"]
+data = PackedVector3Array(-10, 0.5, 5, 10, 0.5, 5, -10, -0.5, 5, 10, 0.5, 5, 10, -0.5, 5, -10, -0.5, 5, 10, 0.5, -5, -10, 0.5, -5, 10, -0.5, -5, -10, 0.5, -5, -10, -0.5, -5, 10, -0.5, -5, 10, 0.5, 5, 10, 0.5, -5, 10, -0.5, 5, 10, 0.5, -5, 10, -0.5, -5, 10, -0.5, 5, -10, 0.5, -5, -10, 0.5, 5, -10, -0.5, -5, -10, 0.5, 5, -10, -0.5, 5, -10, -0.5, -5, 10, 0.5, 5, -10, 0.5, 5, 10, 0.5, -5, -10, 0.5, 5, -10, 0.5, -5, 10, 0.5, -5, -10, -0.5, 5, 10, -0.5, 5, -10, -0.5, -5, 10, -0.5, 5, 10, -0.5, -5, -10, -0.5, -5)
+
+[node name="PlaceholderStation" type="Node3D" unique_id=87202332 node_paths=PackedStringArray("termination_point", "entrance_point")]
+script = ExtResource("1_qx8l0")
+termination_point = NodePath("TerminationPoint")
+entrance_point = NodePath("EntrancePoint")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=642634060]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1135274962]
+mesh = SubResource("BoxMesh_bhunq")
+surface_material_override/0 = SubResource("StandardMaterial3D_b5hyx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=990435284]
+shape = SubResource("ConcavePolygonShape3D_qx8l0")
+
+[node name="TerminationPoint" type="Node3D" parent="." unique_id=1060208327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 0)
+
+[node name="EntrancePoint" type="Node3D" parent="." unique_id=205581695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.5, 0)

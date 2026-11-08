@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+addons/webrtc_native/lib/~libwebrtc_native.windows.template_debug.x86_64.dll
