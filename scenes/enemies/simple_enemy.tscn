@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://bxbmht5bqunvx"]
+
+[ext_resource type="Script" uid="uid://diyqcqlpormw8" path="res://simple_enemy.gd" id="1_2kgy0"]
+[ext_resource type="Script" uid="uid://bonvjlf2ny5v4" path="res://scenes/player/components/health_component.gd" id="2_ho7jy"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_fgow6"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_qwvii"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_wlamu"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cf2kt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pitpm"]
+albedo_color = Color(0.5803922, 0.39607844, 0.3137255, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pitpm"]
+material = SubResource("StandardMaterial3D_pitpm")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pitpm"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2kgy0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pitpm"]
+radius = 10.0
+
+[node name="SimpleEnemy" type="CharacterBody3D" unique_id=401680372 node_paths=PackedStringArray("nav_agent", "state_chart", "health_component")]
+script = ExtResource("1_2kgy0")
+nav_agent = NodePath("NavigationAgent3D")
+state_chart = NodePath("StateChart")
+health_component = NodePath("HealthComponent")
+min_distance_to_target = 5.0
+max_distance_to_target = 15.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=284961151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_pitpm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1848175387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pitpm")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=992374813]
+script = ExtResource("2_ho7jy")
+max_health = 2.0
+metadata/_custom_type_script = "uid://bonvjlf2ny5v4"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1775486867]
+target_desired_distance = 1.1
+avoidance_enabled = true
+radius = 2.0
+
+[node name="StateChart" type="Node" parent="." unique_id=1097326249]
+script = ExtResource("3_fgow6")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=1436597047]
+script = ExtResource("4_qwvii")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateChart/Root" unique_id=1195325670]
+script = ExtResource("5_wlamu")
+
+[node name="FollowState" type="Node" parent="StateChart/Root" unique_id=188830976]
+script = ExtResource("5_wlamu")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root" unique_id=187313742]
+script = ExtResource("6_cf2kt")
+to = NodePath("../IdleState")
+event = &"toIdle"
+delay_in_seconds = "0.0"
+
+[node name="ToFollow" type="Node" parent="StateChart/Root" unique_id=1411109663]
+script = ExtResource("6_cf2kt")
+to = NodePath("../FollowState")
+event = &"toFollow"
+delay_in_seconds = "0.0"
+
+[node name="FleeState" type="Node" parent="StateChart/Root" unique_id=1624688774]
+script = ExtResource("5_wlamu")
+
+[node name="StrafeState" type="Node" parent="StateChart/Root" unique_id=787849323]
+script = ExtResource("5_wlamu")
+
+[node name="ToFlee" type="Node" parent="StateChart/Root" unique_id=592798972]
+script = ExtResource("6_cf2kt")
+to = NodePath("../FleeState")
+event = &"toFlee"
+delay_in_seconds = "0.0"
+
+[node name="ToStrafe" type="Node" parent="StateChart/Root" unique_id=1694938930]
+script = ExtResource("6_cf2kt")
+to = NodePath("../StrafeState")
+event = &"toStrafe"
+delay_in_seconds = "0.0"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1096150740]
+replication_config = SubResource("SceneReplicationConfig_2kgy0")
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=1408826884]
+collision_mask = 9
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1396287160]
+shape = SubResource("SphereShape3D_pitpm")
+
+[connection signal="state_physics_processing" from="StateChart/Root/FollowState" to="." method="_on_follow_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/FleeState" to="." method="_on_flee_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/StrafeState" to="." method="_on_strafe_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/StrafeState" to="." method="_on_strafe_state_physics_processing"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

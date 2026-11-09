@@ -44,6 +44,10 @@ folder_colors={
 "res://scripts/": "yellow"
 }
 
+[global_group]
+
+Navigation=""
+
 [importer_defaults]
 
 animation_library={
