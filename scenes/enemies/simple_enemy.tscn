@@ -24,13 +24,15 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pitpm"]
-radius = 5.0
+radius = 10.0
 
 [node name="SimpleEnemy" type="CharacterBody3D" unique_id=401680372 node_paths=PackedStringArray("nav_agent", "state_chart", "health_component")]
 script = ExtResource("1_2kgy0")
 nav_agent = NodePath("NavigationAgent3D")
 state_chart = NodePath("StateChart")
 health_component = NodePath("HealthComponent")
+min_distance_to_target = 5.0
+max_distance_to_target = 15.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=284961151]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -76,6 +78,24 @@ to = NodePath("../FollowState")
 event = &"toFollow"
 delay_in_seconds = "0.0"
 
+[node name="FleeState" type="Node" parent="StateChart/Root" unique_id=1624688774]
+script = ExtResource("5_wlamu")
+
+[node name="StrafeState" type="Node" parent="StateChart/Root" unique_id=787849323]
+script = ExtResource("5_wlamu")
+
+[node name="ToFlee" type="Node" parent="StateChart/Root" unique_id=592798972]
+script = ExtResource("6_cf2kt")
+to = NodePath("../FleeState")
+event = &"toFlee"
+delay_in_seconds = "0.0"
+
+[node name="ToStrafe" type="Node" parent="StateChart/Root" unique_id=1694938930]
+script = ExtResource("6_cf2kt")
+to = NodePath("../StrafeState")
+event = &"toStrafe"
+delay_in_seconds = "0.0"
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1096150740]
 replication_config = SubResource("SceneReplicationConfig_2kgy0")
 
@@ -87,4 +107,7 @@ monitorable = false
 shape = SubResource("SphereShape3D_pitpm")
 
 [connection signal="state_physics_processing" from="StateChart/Root/FollowState" to="." method="_on_follow_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/FleeState" to="." method="_on_flee_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/StrafeState" to="." method="_on_strafe_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/StrafeState" to="." method="_on_strafe_state_physics_processing"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
