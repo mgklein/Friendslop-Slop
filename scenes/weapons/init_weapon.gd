@@ -5,12 +5,15 @@ extends Node3D
 
 @onready var weapon_mesh: PackedScene
 
-@onready var camera = %Camera3D
+@export var camera : Camera3D
 
 signal projectile_info
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if get_parent().is_in_group("Players"):
+		print("parent is player")
+		camera = %Camera3D
 	load_weapon()
 
 
@@ -28,10 +31,13 @@ func shoot_weapon():#Function to shoot the weapon
 
 
 func get_shoot_direction(): #Function to determine correct direction to fire projectile
-	var viewport_rect = get_viewport().get_visible_rect().size
-	var raycast_start = camera.project_ray_origin(viewport_rect / 2)
-	var raycast_end = raycast_start + camera.project_ray_normal(viewport_rect / 2) * 200
-	return (raycast_end - raycast_start).normalized()
-	
+	if get_parent().is_in_group("Players"):
+		var viewport_rect = get_viewport().get_visible_rect().size
+		var raycast_start = camera.project_ray_origin(viewport_rect / 2)
+		var raycast_end = raycast_start + camera.project_ray_normal(viewport_rect / 2) * 200
+		return (raycast_end - raycast_start).normalized()
+	else:
+		return Vector3(0,0,0)
+
 func _on_player_controller_shoot_weapon(): #From playercontroller script upon shoot button
 	shoot_weapon()

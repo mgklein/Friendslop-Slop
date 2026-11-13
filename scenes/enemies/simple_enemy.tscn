@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_qwvii"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_wlamu"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cf2kt"]
+[ext_resource type="PackedScene" uid="uid://dqj1qp7f6n06n" path="res://scenes/weapons/weapon.tscn" id="7_fgow6"]
+[ext_resource type="Resource" uid="uid://dbdq1fum4tksn" path="res://assets/weapons/AK/AKWeapon.tres" id="8_qwvii"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pitpm"]
 albedo_color = Color(0.5803922, 0.39607844, 0.3137255, 1)
@@ -25,6 +27,9 @@ properties/1/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pitpm"]
 radius = 10.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_pitpm"]
+size = Vector3(1, 1, 0.5)
 
 [node name="SimpleEnemy" type="CharacterBody3D" unique_id=401680372 node_paths=PackedStringArray("nav_agent", "state_chart", "health_component")]
 script = ExtResource("1_2kgy0")
@@ -105,6 +110,13 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1396287160]
 shape = SubResource("SphereShape3D_pitpm")
+
+[node name="Weapon" parent="." unique_id=207957914 instance=ExtResource("7_fgow6")]
+WEAPON_TYPE = ExtResource("8_qwvii")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=683264190]
+transform = Transform3D(-0.9999712, 0.007573064, 0.0004390181, 0, -0.057873838, 0.9983239, 0.0075857784, 0.9982952, 0.057872172, 0.033499777, 1.6071413, -0.33518887)
+mesh = SubResource("PrismMesh_pitpm")
 
 [connection signal="state_physics_processing" from="StateChart/Root/FollowState" to="." method="_on_follow_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/FleeState" to="." method="_on_flee_state_physics_processing"]
