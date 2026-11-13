@@ -10,6 +10,7 @@ extends BaseEnemy
 @export var min_distance_to_target: float
 @export var max_distance_to_target: float
 
+@export var shoot_timer : Timer
 
 var target: Node3D
 var strafe_position : Vector3
@@ -80,7 +81,6 @@ func moving_to_target(delta):
 	# Rotate to face move direction
 	var towards_target = Vector2(global_position.x,global_position.z).angle_to(Vector2(target.global_position.x,target.global_position.z))
 	var target_rotation = rad_to_deg(towards_target)
-	print(target_rotation)
 	#var target_rotation = atan2(direction.x, direction.z)
 	#global_rotation.y = lerp_angle(rotation.y,target_rotation.y, 1 * delta)
 	self.look_at(target.global_position)
@@ -129,6 +129,19 @@ func next_strafe_position(): # Use this to create the next strafe target positio
 func _on_strafe_state_entered(): # Generates a strafe position upon entering this state
 	next_strafe_position()
 
-func shoot_gun():
-	pass # use this function to make enemies shoot gun. Likely pass the target rotation to the weapon, down to weapon, back up to this script to pass through to projectile handler
+func shoot_gun():# use this function to make enemies shoot gun. Likely pass the target rotation to the weapon, down to weapon, back up to this script to pass through to projectile handler
 	shoot_weapon_main.emit(target)
+	shoot_timer.start()
+	print("Enemy shooted")
+
+
+func _on_follow_state_entered():
+	shoot_gun()
+
+
+func _on_shoot_timer_timeout():
+	shoot_gun()
+
+
+func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed): #From weapon child node, this is sent to the projectilehandler singleton
+	ProjectileHandler.shoot_ball.rpc_id(1, projectile_position,projectile_rotation, projectile_speed)
