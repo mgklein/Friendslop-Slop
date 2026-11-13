@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ch7k87bjc2gua"]
+
+[ext_resource type="PackedScene" uid="uid://i2syn71vvjps" path="res://assets/nature/lowpolytree.glb" id="1_70l0r"]
+
+[node name="lowpolytree" unique_id=750253544 instance=ExtResource("1_70l0r")]
