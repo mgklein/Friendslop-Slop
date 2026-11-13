@@ -10,8 +10,12 @@ extends BaseEnemy
 @export var min_distance_to_target: float
 @export var max_distance_to_target: float
 
+@export var shoot_timer : Timer
+
 var target: Node3D
 var strafe_position : Vector3
+
+signal shoot_weapon_main
 
 func _ready() -> void:
 	super._ready()
@@ -75,9 +79,15 @@ func moving_to_target(delta):
 	nav_agent.velocity = direction * follow_speed
 	
 	# Rotate to face move direction
-	if direction.length() > 0.01:
-		var target_rotation = atan2(direction.x, direction.z)
-		rotation.y = lerp_angle(rotation.y, target_rotation, 5.0 * delta)
+	var towards_target = Vector2(global_position.x,global_position.z).angle_to(Vector2(target.global_position.x,target.global_position.z))
+	var target_rotation = rad_to_deg(towards_target)
+	#var target_rotation = atan2(direction.x, direction.z)
+	#global_rotation.y = lerp_angle(rotation.y,target_rotation.y, 1 * delta)
+	self.look_at(target.global_position)
+	#global_rotation_degrees.y = target_rotation
+	#rotation.x = lerp_angle(rotation.x, target_rotation.x, 5.0 * delta)
+	#rotation.y = lerp_angle(rotation.y, target_rotation.y, delta)
+	#rotation.z = lerp_angle(rotation.z, target_rotation.z, 5.0 * delta)
 
 func take_damage(damage, source):
 	health_component.take_damage(damage)
@@ -92,7 +102,6 @@ func check_distance():
 	return distance_to_target
 
 func _on_flee_state_physics_processing(delta): # If the enemy gets too close, make the enemy move in opposite direction
-	print("Fleeing")
 	var target_direction = target.global_position.direction_to(global_position)
 	var flee_position = global_position + (target_direction * Vector3(randf_range(0.1,3),randf_range(0.1,3),randf_range(0.1,3)) * 5)
 	nav_agent.target_position = flee_position
@@ -119,3 +128,20 @@ func next_strafe_position(): # Use this to create the next strafe target positio
 
 func _on_strafe_state_entered(): # Generates a strafe position upon entering this state
 	next_strafe_position()
+
+func shoot_gun():# use this function to make enemies shoot gun. Likely pass the target rotation to the weapon, down to weapon, back up to this script to pass through to projectile handler
+	shoot_weapon_main.emit(target)
+	shoot_timer.start()
+	print("Enemy shooted")
+
+
+func _on_follow_state_entered():
+	shoot_gun()
+
+
+func _on_shoot_timer_timeout():
+	shoot_gun()
+
+
+func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed): #From weapon child node, this is sent to the projectilehandler singleton
+	ProjectileHandler.shoot_ball.rpc_id(1, projectile_position,projectile_rotation, projectile_speed)

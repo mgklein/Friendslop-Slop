@@ -11,6 +11,6 @@ position = Vector3(0.29545242, 1.2838941, -0.5563968)
 rotation = Vector3(0, 180, 0)
 mesh = ExtResource("1_ktrwl")
 shootable = true
-projectile_speed = 50
+projectile_speed = 100
 projectile_scene = ExtResource("2_bd6hg")
 metadata/_custom_type_script = "uid://d3b4gr04a07yq"
