@@ -72,9 +72,10 @@ func _process(_delta: float) -> void:
 		shoot()
 		var players = get_tree().get_nodes_in_group("Players")
 		for i in len(players):
-			print("Player rot:",players[i].global_rotation_degrees)
-			print("Camera rot:",players[i].camera_controller.global_rotation_degrees)
-			print("Head rot:",players[i].camera_controller.get_node("Head").global_rotation_degrees)
+			if debug:
+				print("Player rot:",players[i].global_rotation_degrees)
+				print("Camera rot:",players[i].camera_controller.global_rotation_degrees)
+				print("Head rot:",players[i].camera_controller.get_node("Head").global_rotation_degrees)
 	
 	if Input.is_action_just_pressed("interact") and interaction_raycast.is_colliding():
 		var collider = interaction_raycast.get_collider()
@@ -134,7 +135,6 @@ func update_rotation(rotation_input) -> void:
 	#global_transform.basis = Basis.from_euler(rotation_input)
 
 
-
 func sprint() -> void:
 	sprint_modifier = sprint_speed
 
@@ -188,4 +188,4 @@ func sync_train_moving():
 
 
 func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed): #From weapon child node, this is sent to the projectilehandler singleton
-	ProjectileHandler.shoot_ball.rpc_id(1, projectile_position,projectile_rotation, projectile_speed)
+	ProjectileHandler.shoot_ball.rpc_id(1,projectile_position,projectile_rotation, projectile_speed)

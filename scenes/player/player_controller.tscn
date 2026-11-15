@@ -344,12 +344,16 @@ script = ExtResource("17_ggkdx")
 [node name="CrouchingState" type="Node" parent="StateMachine/PostureState" unique_id=1487489491]
 script = ExtResource("18_wpncg")
 
-[node name="Weapon" parent="." unique_id=207957914 node_paths=PackedStringArray("camera") instance=ExtResource("23_aoka8")]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.29545242, 1.2838941, -0.5563968)
-WEAPON_TYPE = ExtResource("24_2xfig")
-camera = NodePath("../CameraController/Camera3D")
+[node name="WeaponRotation" type="Node3D" parent="." unique_id=1238032129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21956436, 1.4674344, 0)
 
-[connection signal="shoot_weapon" from="." to="Weapon" method="_on_player_controller_shoot_weapon"]
+[node name="Weapon" parent="WeaponRotation" unique_id=207957914 node_paths=PackedStringArray("camera", "player_node") instance=ExtResource("23_aoka8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009830967, -0.109024286, -0.51231146)
+WEAPON_TYPE = ExtResource("24_2xfig")
+camera = NodePath("../../CameraController/Camera3D")
+player_node = NodePath("../..")
+
+[connection signal="shoot_weapon" from="." to="WeaponRotation/Weapon" method="_on_player_controller_shoot_weapon"]
 [connection signal="state_physics_processing" from="StateChart/Root/Riding/Level" to="StateMachine/RidingState/LevelState" method="_on_level_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Riding/Train" to="StateMachine/RidingState/TrainState" method="_on_train_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateMachine/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
@@ -364,4 +368,4 @@ camera = NodePath("../CameraController/Camera3D")
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Standing" to="StateMachine/PostureState/StandingState" method="_on_standing_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_physics_processing"]
-[connection signal="projectile_info" from="Weapon" to="." method="_on_weapon_projectile_info"]
+[connection signal="projectile_info" from="WeaponRotation/Weapon" to="." method="_on_weapon_projectile_info"]

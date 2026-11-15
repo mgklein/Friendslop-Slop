@@ -12,14 +12,14 @@ extends BaseEnemy
 
 @export var shoot_timer : Timer
 
-var target: Node3D
+@export var target: Node3D
 var strafe_position : Vector3
 
 signal shoot_weapon_main
 
 func _ready() -> void:
 	super._ready()
-	
+	add_to_group("Enemies")
 	#Find Player
 	target = get_tree().get_first_node_in_group("Players")
 	
@@ -89,9 +89,10 @@ func moving_to_target(delta):
 	#rotation.y = lerp_angle(rotation.y, target_rotation.y, delta)
 	#rotation.z = lerp_angle(rotation.z, target_rotation.z, 5.0 * delta)
 
+@rpc("any_peer","call_local") # Can receive damage call from any peer
 func take_damage(damage, source):
 	health_component.take_damage(damage)
-	pass
+
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
@@ -101,7 +102,7 @@ func check_distance():
 	var distance_to_target = global_position.distance_squared_to(target.global_position)
 	return distance_to_target
 
-func _on_flee_state_physics_processing(delta): # If the enemy gets too close, make the enemy move in opposite direction
+func _on_flee_state_physics_processing(delta): # If the enemy gets too close, make the enemy move in opposite direction. 
 	var target_direction = target.global_position.direction_to(global_position)
 	var flee_position = global_position + (target_direction * Vector3(randf_range(0.1,3),randf_range(0.1,3),randf_range(0.1,3)) * 5)
 	nav_agent.target_position = flee_position
@@ -132,7 +133,7 @@ func _on_strafe_state_entered(): # Generates a strafe position upon entering thi
 func shoot_gun():# use this function to make enemies shoot gun. Likely pass the target rotation to the weapon, down to weapon, back up to this script to pass through to projectile handler
 	shoot_weapon_main.emit(target)
 	shoot_timer.start()
-	print("Enemy shooted")
+
 
 
 func _on_follow_state_entered():

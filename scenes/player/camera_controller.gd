@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 		update_camera_rotation(component_mouse_capture.consume_mouse_input())
 
 
-func update_camera_rotation(input: Vector2) -> void:
+func update_camera_rotation(input: Vector2) -> void: # This will also update a weapon handler node to ensure the weapon is matching what is going on with the viewport
 	_rotation.x += input.y
 	_rotation.y += input.x
 	_rotation.x = clamp(_rotation.x, deg_to_rad(tilt_lower_limit), deg_to_rad(tilt_upper_limit))

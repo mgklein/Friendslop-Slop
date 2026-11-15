@@ -10,14 +10,19 @@ signal died()
 @export var max_health: float = 100.0
 @export var start_at_max: bool = true
 
-var current_health: float
-var is_alive: bool = true
+@export var current_health: float
+@export var is_alive: bool = true
 
 
 func _ready() -> void:
 	if start_at_max:
 		current_health = max_health
 
+func _process(delta):
+	if is_alive:
+		return
+	else:
+		_handle_death()
 
 func take_damage(amount: float, source: Node3D = null) -> void:
 	if not is_alive:
