@@ -7,7 +7,6 @@
 [resource]
 script = ExtResource("1_lwh18")
 name = &"AK"
-position = Vector3(0.29545242, 1.2838941, -0.5563968)
 rotation = Vector3(0, 180, 0)
 mesh = ExtResource("1_ktrwl")
 shootable = true
