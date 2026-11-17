@@ -37,7 +37,7 @@ radius = 10.0
 [sub_resource type="PrismMesh" id="PrismMesh_pitpm"]
 size = Vector3(1, 1, 0.5)
 
-[node name="SimpleEnemy" type="CharacterBody3D" unique_id=401680372 node_paths=PackedStringArray("nav_agent", "state_chart", "health_component", "shoot_timer")]
+[node name="SimpleEnemy" type="CharacterBody3D" unique_id=401680372 node_paths=PackedStringArray("nav_agent", "state_chart", "health_component", "shoot_timer", "recalc_target")]
 script = ExtResource("1_2kgy0")
 nav_agent = NodePath("NavigationAgent3D")
 state_chart = NodePath("StateChart")
@@ -45,6 +45,7 @@ health_component = NodePath("HealthComponent")
 min_distance_to_target = 5.0
 max_distance_to_target = 15.0
 shoot_timer = NodePath("ShootTimer")
+recalc_target = NodePath("RecalcTarget")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=284961151]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -118,22 +119,30 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1396287160]
 shape = SubResource("SphereShape3D_pitpm")
 
-[node name="Weapon" parent="." unique_id=207957914 instance=ExtResource("7_fgow6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42765045, 1.1453696, -0.50694805)
-WEAPON_TYPE = ExtResource("8_qwvii")
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=683264190]
 transform = Transform3D(-0.9999712, 0.007573064, 0.0004390181, 0, -0.057873838, 0.9983239, 0.0075857784, 0.9982952, 0.057872172, 0.033499777, 1.6071413, -0.33518887)
 mesh = SubResource("PrismMesh_pitpm")
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=47575704]
 
-[connection signal="shoot_weapon_main" from="." to="Weapon" method="_on_simple_enemy_shoot_weapon_main"]
+[node name="RecalcTarget" type="Timer" parent="." unique_id=868688538]
+wait_time = 10.0
+autostart = true
+
+[node name="WeaponRotation" type="Node3D" parent="." unique_id=548429775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9739504, 0)
+
+[node name="Weapon" parent="WeaponRotation" unique_id=207957914 instance=ExtResource("7_fgow6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4167652, 0, -0.7993499)
+WEAPON_TYPE = ExtResource("8_qwvii")
+
+[connection signal="shoot_weapon_main" from="." to="WeaponRotation/Weapon" method="_on_simple_enemy_shoot_weapon_main"]
 [connection signal="state_entered" from="StateChart/Root/FollowState" to="." method="_on_follow_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/FollowState" to="." method="_on_follow_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/FleeState" to="." method="_on_flee_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/StrafeState" to="." method="_on_strafe_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/StrafeState" to="." method="_on_strafe_state_physics_processing"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="projectile_info" from="Weapon" to="." method="_on_weapon_projectile_info"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="RecalcTarget" to="." method="_on_recalc_target_timeout"]
+[connection signal="projectile_info" from="WeaponRotation/Weapon" to="." method="_on_weapon_projectile_info"]

@@ -21,7 +21,7 @@ func _process(delta):
 	else:
 		move_projectiles(delta)
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local") # This should likely only be called by the server. The clients should be able to tell the server they want to shoot and then the server shoots.
 func shoot_ball(pos, dir, force):
 	#var new_ball: RigidBody3D = BALL.instantiate() #Eventually, this will create a projectile from the dictionary of projectiles
 	#new_ball.source = multiplayer.get_remote_sender_id()
@@ -36,7 +36,6 @@ func shoot_ball(pos, dir, force):
 	new_bullet.get_child(3).body_entered.connect(on_projectile_collide)
 
 
-@rpc("any_peer","call_local")
 func move_projectiles(delta):
 	for i in spawn_container.get_children():
 		i.position += i.global_rotation * proj_speed * delta
@@ -44,11 +43,11 @@ func move_projectiles(delta):
 	# This will be used to move all projectiles in the scene. They likely will not be physics objects anymore. I don't think there's any need. This will replace the functions in shoot ball function
 	# This function will also be called in a for loop under the process function
 
-@rpc("any_peer","call_local")
+@rpc("authority","call_local")
 func on_projectile_collide(body): # Handles projectile collisions with bodies
 	if body == null:
 		return
-	elif body.is_in_group("Enemies"):
-		body.take_damage.rpc(10,multiplayer.get_remote_sender_id()) # Sends take damage call to all peers to sync
+	elif body.is_in_group("Enemies") and is_multiplayer_authority():
+		body.take_damage.rpc(1,multiplayer.get_unique_id()) # Sends take damage call to all peers to sync
 		print(body)
 	pass

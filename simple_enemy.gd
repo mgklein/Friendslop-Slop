@@ -11,6 +11,7 @@ extends BaseEnemy
 @export var max_distance_to_target: float
 
 @export var shoot_timer : Timer
+@export var recalc_target: Timer
 
 @export var target: Node3D
 var strafe_position : Vector3
@@ -89,10 +90,18 @@ func moving_to_target(delta):
 	#rotation.y = lerp_angle(rotation.y, target_rotation.y, delta)
 	#rotation.z = lerp_angle(rotation.z, target_rotation.z, 5.0 * delta)
 
-@rpc("any_peer","call_local") # Can receive damage call from any peer
+@rpc("authority","call_local") # Can receive damage call from only server projectile handler
 func take_damage(damage, source):
 	health_component.take_damage(damage)
 
+@rpc("any_peer","call_local") # Can receive damage call from any peer
+func recalc_targets():
+	var player_list: Array = get_tree().get_nodes_in_group("Players")
+	var closest_target_dist: float = 900
+	for i in player_list:
+		var player_distance = global_position.distance_to(i.global_position)
+		if player_distance < closest_target_dist:
+			target = i
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
@@ -145,4 +154,8 @@ func _on_shoot_timer_timeout():
 
 
 func _on_weapon_projectile_info(projectile_position,projectile_rotation,projectile_speed): #From weapon child node, this is sent to the projectilehandler singleton
-	ProjectileHandler.shoot_ball.rpc_id(1, projectile_position,projectile_rotation, projectile_speed)
+	ProjectileHandler.shoot_ball.rpc_id(multiplayer.get_unique_id(), projectile_position,projectile_rotation, projectile_speed)
+
+
+func _on_recalc_target_timeout():
+	recalc_targets.rpc()
