@@ -72,6 +72,9 @@ func remove_player(peer_id):
 
 
 func leave_server():
+	print("session:", tube_client.session_id)
+	print("peer:", multiplayer.multiplayer_peer)
+	print("connected:", multiplayer.has_multiplayer_peer())
 	if tube_enabled:
 		tube_client.leave_session()
 	multiplayer.multiplayer_peer.close()

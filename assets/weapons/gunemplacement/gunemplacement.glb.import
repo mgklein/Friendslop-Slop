@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d1nipnd1tbytx"
-path="res://.godot/imported/gunemplacement.glb-0a6a7ab564c2b9043ccbd64f2ef3a34d.scn"
+path="res://.godot/imported/gunemplacement.glb-d7e4becdfdd89aa445b02639b6d00a43.scn"
 
 [deps]
 
-source_file="res://assets/weapons/gunemplacement.glb"
-dest_files=["res://.godot/imported/gunemplacement.glb-0a6a7ab564c2b9043ccbd64f2ef3a34d.scn"]
+source_file="res://assets/weapons/gunemplacement/gunemplacement.glb"
+dest_files=["res://.godot/imported/gunemplacement.glb-d7e4becdfdd89aa445b02639b6d00a43.scn"]
 
 [params]
 

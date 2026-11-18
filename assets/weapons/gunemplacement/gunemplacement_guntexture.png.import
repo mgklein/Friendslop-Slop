@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hmlmqwos6hub"
-path.s3tc="res://.godot/imported/gunemplacement_guntexture.png-a0f2136c32d5006fa47c6fd69703093a.s3tc.ctex"
+path.s3tc="res://.godot/imported/gunemplacement_guntexture.png-b817c82faffad09a32ac75650f5ffc80.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/weapons/gunemplacement_guntexture.png"
-dest_files=["res://.godot/imported/gunemplacement_guntexture.png-a0f2136c32d5006fa47c6fd69703093a.s3tc.ctex"]
+source_file="res://assets/weapons/gunemplacement/gunemplacement_guntexture.png"
+dest_files=["res://.godot/imported/gunemplacement_guntexture.png-b817c82faffad09a32ac75650f5ffc80.s3tc.ctex"]
 
 [params]
 

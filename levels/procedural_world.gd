@@ -19,9 +19,10 @@ var current_train_speed: float = 0.0
 func _ready() -> void:
 	Global.level = self
 	Global.spawn_container = spawn_container
+	ProjectileHandler.spawn_container = spawn_container
 	
 	timer_target.timeout.connect(spawn_target)
-	Global.train_direction_updated.connect(on_train_direction_updated)
+	#TrainController.train_updated.connect(on_train_updated)
 
 
 func _physics_process(delta: float) -> void:
@@ -35,11 +36,12 @@ func spawn_target():
 		spawn_container.add_child(new_target, true)
 
 
-func on_train_direction_updated(dir: int):
+func on_train_updated(dir: int):
 	target_train_speed = train_speed * dir
 
 
 func move_train(delta: float):
+	target_train_speed = train_speed * TrainController.moving * TrainController.direction
 	# Smoothly adjust current_speed toward target_speed
 	if current_train_speed < target_train_speed:
 		current_train_speed = move_toward(current_train_speed, target_train_speed, acceleration * delta)

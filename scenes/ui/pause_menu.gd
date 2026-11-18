@@ -13,8 +13,11 @@ var player_controller: PlayerController
 func _ready() -> void:
 	hide()
 	if not is_multiplayer_authority():
-		return # Original tutorial hid menu node here and canvas layer above for some reason
-
+		pass # Original tutorial hid menu node here and canvas layer above for some reason
+	#print(Network.tube_client.session_id)
 	label_session.text = Network.tube_client.session_id
 	button_leave.pressed.connect(func(): Network.leave_server())
 	button_copy_session.pressed.connect(func(): DisplayServer.clipboard_set(Network.tube_client.session_id))
+
+func set_session_id():
+	label_session.text = Network.tube_client.session_id

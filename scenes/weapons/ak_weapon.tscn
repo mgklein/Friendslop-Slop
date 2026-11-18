@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://fybawbkemhyf"]
+
+[ext_resource type="PackedScene" uid="uid://cvcjucjlvuu5e" path="res://assets/weapons/AK/AKWeapon.glb" id="1_s400x"]
+
+[node name="AKWeapon" unique_id=628812095 instance=ExtResource("1_s400x")]

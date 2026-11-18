@@ -1,5 +1,281 @@
-[gd_scene format=3 uid="uid://dj5t0cvmha4y"]
+[gd_scene format=4 uid="uid://dj5t0cvmha4y"]
 
 [ext_resource type="PackedScene" uid="uid://meacoml3awc1" path="res://assets/trains/test/trainengine-test.glb" id="1_pet8h"]
+[ext_resource type="Texture2D" uid="uid://dtw1h3iphlocm" path="res://assets/trains/test/trainengine-test_guntexture.png" id="2_bksyi"]
+
+[sub_resource type="Animation" id="Animation_pet8h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trainbase/enginelever:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5227243, 0.7285651, -4.1685286)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trainbase/enginelever:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.42229483, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Enginelever-cycolshape:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5200144, -0.8324126, -5.5901384)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Enginelever-cycolshape:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.49396497, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trainbase/directionlever:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5538932, 0.7285651, -4.1685286)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trainbase/directionlever:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.42229486, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Directionlever-cycolshape:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5642879, -0.832, -5.6)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Directionlever-cycolshape:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.42229483, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ct27g"]
+resource_name = "toggle_direction_lever"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trainbase/directionlever:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5538932, 0.7285651, -4.1685286), Vector3(0.5538932, 0.7285651, -3.842533)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trainbase/directionlever:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.42229486, 0, 0), Vector3(0.458, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Directionlever-cycolshape:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5642879, -0.832, -5.6), Vector3(0.5642879, -0.832, -5.265771)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Directionlever-cycolshape:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.42229483, 0, 0), Vector3(0.46104822, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bksyi"]
+resource_name = "toggle_engine_lever"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trainbase/enginelever:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.5227243, 0.7285651, -4.1685286), Vector3(-0.5227243, 0.7285651, -3.730103)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trainbase/enginelever:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.42229483, 0, 0), Vector3(0.3947408, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Enginelever-cycolshape:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.52, -0.832, -5.6), Vector3(-0.52, -0.8281772, -5.194514)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Enginelever-cycolshape:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.42229483, 0, 0), Vector3(0.44811088, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct27g"]
+_data = {
+&"RESET": SubResource("Animation_pet8h"),
+&"toggle_direction_lever": SubResource("Animation_ct27g"),
+&"toggle_engine_lever": SubResource("Animation_bksyi")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi0n3"]
+resource_name = "GunTexture"
+cull_mode = 2
+albedo_texture = ExtResource("2_bksyi")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_whtmo"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAAGAAIAAAAHAAYABQACAAYABwAFAAYAAwAAAAIABwAAAAMABQAEAAIAAwACAAQABwABAAUABwADAAEAAQAEAAUAAQADAAQA"),
+"lods": [2.0, PackedByteArray("AAABAAIAAQAAAAMAAwAAAAIAAQADAAQAAwACAAQAAQAFAAIABQAEAAIAAQAEAAUA")],
+"name": "GunTexture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAAAA/////wAA//8AAP//AAD///////8AAP////8AAAAAAAD//wAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_plo7e"]
+resource_name = "trainengine-test_Cube_063"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/1////9f/3//n////5//f/+f/z//3/8//1//P/8f/z//nwAA/18AAP+f/7//X/+//9//f/8f/38="),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAKAAIAAAALAAoACwADAAoACwABAAMAAwAFAAwAAwAEAAUAAQAEAAMAAQAGAAQABgAIAAQABgAJAAgADQAGAAEADQAHAAYA"),
+"lods": [2.0, PackedByteArray("AAABAAIAAQADAAIAAQAEAAMAAwAEAAUAAQAGAAQAAQAHAAYABgAIAAQABgAJAAgA")],
+"material": SubResource("StandardMaterial3D_xi0n3"),
+"name": "GunTexture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAAAAP//c9H//wAAAADq2gAA/////0rA/////wAA+vT///////8E3QAA/////4f2//8AAP//gLYAAAAA//8/qAAA/////0rAAAAAAP//c9EAAP//AABv2QAAAAAAABr7AAD//wAA4ugAAAAAAACT4TDQs/njJzBLufjFyDg9eiBmKbIMgmibnmsRyzicQhmvufjFyDDQs/n6yua6+spQ1xh1zNKxJ5+L")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_whtmo")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_17sv6"]
+height = 1.1812559
+radius = 0.10685708
 
 [node name="trainengine-test" unique_id=1845770554 instance=ExtResource("1_pet8h")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0" unique_id=1127816861]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_ct27g")
+
+[node name="enginelever" parent="Trainbase" parent_id_path=PackedInt32Array(1245998992) index="3" unique_id=641278113]
+unique_name_in_owner = true
+transform = Transform3D(0.08082094, 0, 0, 0, 0.5428794, 0.03312486, 0, -0.24393085, 0.07372091, -0.5227243, 0.7285651, -4.1685286)
+
+[node name="directionlever" type="MeshInstance3D" parent="Trainbase" parent_id_path=PackedInt32Array(1245998992) index="4" unique_id=1636298679]
+unique_name_in_owner = true
+transform = Transform3D(0.08082094, 0, 0, 0, 0.5428794, 0.03312486, 0, -0.24393085, 0.07372091, 0.5538932, 0.7285651, -4.1685286)
+mesh = SubResource("ArrayMesh_plo7e")
+
+[node name="Enginelever-cycolshape" parent="." index="15" unique_id=1524285349]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.8804599, 0.47412062, 0, -0.47412062, 0.8804599, -0.5200144, -0.8324126, -5.5901384)
+
+[node name="Directionlever-cycolshape" type="CollisionShape3D" parent="." index="16" unique_id=2073420184]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.91215074, 0.40985474, 0, -0.40985474, 0.91215074, 0.5642879, -0.832, -5.6)
+shape = SubResource("CylinderShape3D_17sv6")
