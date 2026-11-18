@@ -15,6 +15,16 @@ extends Path3D
 			for child in get_children():
 				if child is CSGPolygon3D:
 					child.polygon = child.polygon
+@export var snap_path_only: bool = false:
+	set(value):
+		if value:
+			snap_points_to_mesh()
+			smooth_curve_tangents()
+			notify_property_list_changed()
+			# Refresh CSGPolygon3D children
+			for child in get_children():
+				if child is CSGPolygon3D:
+					child.polygon = child.polygon
 @export var num_intermediate_points: int = 3
 @export var meander_amplitude: float = 8.0
 @export var noise_frequency: float = 0.5
@@ -102,7 +112,7 @@ func snap_points_to_mesh():
 	if not curve:
 		return
 		
-	for i in range(2, curve.point_count - 2):
+	for i in range(curve.point_count): #range(2, curve.point_count - 2):
 		var global_pt = global_transform * curve.get_point_position(i)
 		
 		# Set up a raycast starting above the point, shooting downwards

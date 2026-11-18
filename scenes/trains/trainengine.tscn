@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://meacoml3awc1" path="res://assets/trains/test/trainengine-test.glb" id="1_pet8h"]
 [ext_resource type="Texture2D" uid="uid://dtw1h3iphlocm" path="res://assets/trains/test/trainengine-test_guntexture.png" id="2_bksyi"]
+[ext_resource type="Script" uid="uid://crbfpp0l3sl3x" path="res://scenes/trains/trainengine.gd" id="2_ct27g"]
 
 [sub_resource type="Animation" id="Animation_pet8h"]
 length = 0.001
@@ -257,6 +258,7 @@ height = 1.1812559
 radius = 0.10685708
 
 [node name="trainengine-test" unique_id=1845770554 instance=ExtResource("1_pet8h")]
+script = ExtResource("2_ct27g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0" unique_id=1127816861]
 unique_name_in_owner = true

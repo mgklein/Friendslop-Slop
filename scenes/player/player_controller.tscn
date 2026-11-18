@@ -67,6 +67,7 @@ corner_radius_bottom_left = 5
 
 [node name="PlayerController" type="CharacterBody3D" unique_id=739378603 node_paths=PackedStringArray("state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "standing_raycast")]
 collision_layer = 9
+collision_mask = 3
 script = ExtResource("1_5tt2p")
 state_chart = NodePath("StateChart")
 standing_collision = NodePath("StandingCollision")

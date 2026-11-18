@@ -6,6 +6,7 @@ var username := ""
 var game_controller: GameController
 var level: Node3D
 var spawn_container: Node3D
+var spawn_location: Vector3 = Vector3(-130, 10.0, -65)
 
 const BALL = preload("uid://dlsk78b4aki17")
 
