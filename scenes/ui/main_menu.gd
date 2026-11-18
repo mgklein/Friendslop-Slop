@@ -14,6 +14,7 @@ const WORLD_FOREST = "uid://tb21kw5g8pwt"
 #const PLAYER = preload("uid://d1w5ccem33kle")
 const WORLD_TRACK = "uid://17nxn1glan6p"
 const WORLD_PROCEDURAL = "uid://ppc40eff8d81"
+const WORLD_LOW_POLY = "uid://dp5xr5kwe7oqq"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -47,7 +48,7 @@ func on_join():
 
 
 func add_world():
-	Global.game_controller.change_level_scene(WORLD_PROCEDURAL)
+	Global.game_controller.change_level_scene(WORLD_LOW_POLY)
 	hide()
 
 

@@ -57,7 +57,7 @@ func add_player(peer_id: int):
 	var new_player = PLAYER.instantiate()
 	new_player.name = str(peer_id)
 	
-	new_player.position = Vector3(randf_range(-5.0, 5.0), 1.0, randf_range(-5.0, 5.0))
+	new_player.position = Global.spawn_location + Vector3(randf_range(-5.0, 5.0), 1.0, randf_range(-5.0, 5.0))
 	get_tree().current_scene.add_child(new_player, true)
 
 
