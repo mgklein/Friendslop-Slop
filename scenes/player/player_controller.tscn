@@ -57,6 +57,12 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("CameraController/WeaponRotation/Weapon:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("CameraController/Head:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
 bg_color = Color(1, 1, 1, 1)
@@ -129,6 +135,15 @@ script = ExtResource("5_3nb03")
 [node name="InteractionRaycast" type="RayCast3D" parent="CameraController/Camera3D" unique_id=2064760187]
 target_position = Vector3(0, 0, -3)
 script = ExtResource("6_aoka8")
+
+[node name="WeaponRotation" type="Node3D" parent="CameraController" unique_id=1238032129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21956436, -0.032565594, 0)
+
+[node name="Weapon" parent="CameraController/WeaponRotation" unique_id=207957914 node_paths=PackedStringArray("camera", "player_node") instance=ExtResource("23_aoka8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009830967, -0.109024286, -0.51231146)
+WEAPON_TYPE = ExtResource("24_2xfig")
+camera = NodePath("../../Camera3D")
+player_node = NodePath("../../..")
 
 [node name="StandingRaycast" type="RayCast3D" parent="." unique_id=889945475]
 
@@ -344,16 +359,8 @@ script = ExtResource("17_ggkdx")
 [node name="CrouchingState" type="Node" parent="StateMachine/PostureState" unique_id=1487489491]
 script = ExtResource("18_wpncg")
 
-[node name="WeaponRotation" type="Node3D" parent="." unique_id=1238032129]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21956436, 1.4674344, 0)
-
-[node name="Weapon" parent="WeaponRotation" unique_id=207957914 node_paths=PackedStringArray("camera", "player_node") instance=ExtResource("23_aoka8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009830967, -0.109024286, -0.51231146)
-WEAPON_TYPE = ExtResource("24_2xfig")
-camera = NodePath("../../CameraController/Camera3D")
-player_node = NodePath("../..")
-
-[connection signal="shoot_weapon" from="." to="WeaponRotation/Weapon" method="_on_player_controller_shoot_weapon"]
+[connection signal="shoot_weapon" from="." to="CameraController/WeaponRotation/Weapon" method="_on_player_controller_shoot_weapon"]
+[connection signal="projectile_info" from="CameraController/WeaponRotation/Weapon" to="." method="_on_weapon_projectile_info"]
 [connection signal="state_physics_processing" from="StateChart/Root/Riding/Level" to="StateMachine/RidingState/LevelState" method="_on_level_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Riding/Train" to="StateMachine/RidingState/TrainState" method="_on_train_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateMachine/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
@@ -368,4 +375,3 @@ player_node = NodePath("../..")
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Standing" to="StateMachine/PostureState/StandingState" method="_on_standing_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_physics_processing"]
-[connection signal="projectile_info" from="WeaponRotation/Weapon" to="." method="_on_weapon_projectile_info"]

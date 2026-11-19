@@ -16,7 +16,7 @@ signal projectile_info
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent().is_in_group("Players"):
+	if player_node.is_in_group("Players"):
 		print("parent is player")
 		camera = %Camera3D
 	load_weapon()
@@ -38,7 +38,7 @@ func shoot_weapon():#Function to shoot the weapon
 
 func get_shoot_direction(): #Function to determine correct direction to fire projectile. TO DO change this function to just take the raycast from the gun but this requires the gun moving with camera.
 	# This will eventually just follow the raycast node in each weapon for the shooting position and direction of the bullet making this entire function obsolete. 
-	if get_parent().get_parent().is_in_group("Players"): # Or maybe we can somehow sync a raycast from the viewport/camera to the raycast of the weapon. Then there would still be a need for the way players handle weapon aiming and the way enemies handle it
+	if player_node.is_in_group("Players"): # Or maybe we can somehow sync a raycast from the viewport/camera to the raycast of the weapon. Then there would still be a need for the way players handle weapon aiming and the way enemies handle it
 		var viewport_rect = get_viewport().get_visible_rect().size
 		var raycast_start = camera.project_ray_origin(viewport_rect / 2)
 		var raycast_end = raycast_start + camera.project_ray_normal(viewport_rect / 2) * 200

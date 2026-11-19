@@ -132,9 +132,10 @@ autostart = true
 [node name="WeaponRotation" type="Node3D" parent="." unique_id=548429775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9739504, 0)
 
-[node name="Weapon" parent="WeaponRotation" unique_id=207957914 instance=ExtResource("7_fgow6")]
+[node name="Weapon" parent="WeaponRotation" unique_id=207957914 node_paths=PackedStringArray("player_node") instance=ExtResource("7_fgow6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4167652, 0, -0.7993499)
 WEAPON_TYPE = ExtResource("8_qwvii")
+player_node = NodePath("../..")
 
 [connection signal="shoot_weapon_main" from="." to="WeaponRotation/Weapon" method="_on_simple_enemy_shoot_weapon_main"]
 [connection signal="state_entered" from="StateChart/Root/FollowState" to="." method="_on_follow_state_entered"]
