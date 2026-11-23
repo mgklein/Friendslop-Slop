@@ -11,7 +11,8 @@ var current_train_speed: float = 0.0
 @onready var spawn_container: Node3D = %SpawnContainer
 #@onready var timer_target: Timer = %TimerTarget
 @onready var track: Path3D = %Track
-@onready var track_progress: PathFollow3D = %TrackProgress
+@onready var engine_progress: PathFollow3D = %EngineProgress
+@onready var gun_car_progress: PathFollow3D = %GunCarProgress
 
 
 
@@ -42,4 +43,5 @@ func move_train(delta: float):
 	# Move along the path
 	if track.curve:
 		var total_length = track.curve.get_baked_length()
-		track_progress.progress = clamp(track_progress.progress + current_train_speed * delta, 0, total_length)
+		engine_progress.progress = clamp(engine_progress.progress + current_train_speed * delta, 20.0, total_length)
+		gun_car_progress.progress = engine_progress.progress - 14.0
