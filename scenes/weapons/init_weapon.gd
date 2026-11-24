@@ -10,7 +10,9 @@ extends Node3D
 
 @export var player_node : CharacterBody3D
 
+@export var dispersion : float = 0.05
 var shoot_direction : Vector3
+
 
 signal projectile_info
 
@@ -54,7 +56,11 @@ func get_shoot_direction(): #Function to determine correct direction to fire pro
 func _on_player_controller_shoot_weapon(): #From playercontroller script upon shoot button
 	shoot_weapon()
 
+func add_dispersion():
+	shoot_direction = (shoot_direction + Vector3(randf_range(-dispersion,dispersion), randf_range(-dispersion,dispersion), randf_range(-dispersion,dispersion))).normalized()
+
 
 func _on_simple_enemy_shoot_weapon_main(target):
 	shoot_direction = (target.global_position - global_position).normalized() # Likely should be moved into the get_shoot_direction function
+	add_dispersion()
 	shoot_weapon()

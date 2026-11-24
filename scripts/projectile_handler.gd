@@ -52,4 +52,3 @@ func on_projectile_collide(body): # Handles projectile collisions with bodies
 	elif body.is_in_group("Enemies") and is_multiplayer_authority():
 		body.take_damage.rpc(1,multiplayer.get_unique_id()) # Sends take damage call to all peers to sync
 		print(body)
-	pass
