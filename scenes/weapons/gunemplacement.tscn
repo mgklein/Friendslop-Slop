@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c1574inxe0is4"]
+
+[ext_resource type="PackedScene" uid="uid://d1nipnd1tbytx" path="res://assets/weapons/gunemplacement/gunemplacement.glb" id="1_h0o8d"]
+
+[node name="gunemplacement" unique_id=1827310542 instance=ExtResource("1_h0o8d")]
+
+[node name="TurretBase-animcol" parent="." index="0" unique_id=556914086]
+transform = Transform3D(1.8130777, 0, 0, 0, 0.5774101, 0, 0, 0, 1.8130777, -0.19079861, 1.3071089, -0.10473895)

@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dhrhvk418ypfb" path="res://assets/textures/grass_texture.jpg" id="4_taclm"]
 [ext_resource type="Script" uid="uid://ctpccird6vch0" path="res://levels/track.gd" id="5_lhcox"]
 [ext_resource type="PackedScene" uid="uid://kwhmlfkni0u3" path="res://scenes/trains/guncar.tscn" id="8_taclm"]
+[ext_resource type="PackedScene" uid="uid://bcy3m78kcvkn3" path="res://scenes/enemies/emplacedmgtest.tscn" id="9_6qqxo"]
 [ext_resource type="Script" uid="uid://cdd8igd1536ik" path="res://levels/foliage_trees.gd" id="9_taclm"]
 [ext_resource type="ArrayMesh" uid="uid://dp7k8v8phxp2o" path="res://assets/nature/fir_psx.glb" id="10_6qqxo"]
-[ext_resource type="PackedScene" uid="uid://bxbmht5bqunvx" path="res://scenes/enemies/simple_enemy.tscn" id="10_taclm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1esiv"]
 
@@ -19144,7 +19144,7 @@ generated_path = NodePath("../Track")
 unique_name_in_owner = true
 curve = SubResource("Curve3D_020el")
 
-[node name="trainengine-test" parent="Track" unique_id=1845770554 instance=ExtResource("3_mjysi")]
+[node name="trainengine-test" parent="Track" unique_id=1845770554 groups=["Train"] instance=ExtResource("3_mjysi")]
 transform = Transform3D(0.99994206, -1.9998397e-05, -0.0006829831, 2.1995542e-05, 0.9998273, 0.0029207105, 0.0006829982, -0.002920732, 0.9998272, -130.74228, 4.5015144, -76.39385)
 
 [node name="GunCar" parent="Track" unique_id=954259024 instance=ExtResource("8_taclm")]
@@ -19212,6 +19212,9 @@ progress = 10.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08451843, 3.001501, 0.24967194)
 remote_path = NodePath("../../GunCar")
 
+[node name="Emplacedmgtest" parent="." unique_id=674808214 instance=ExtResource("9_6qqxo")]
+transform = Transform3D(0.018434629, 0, -0.99983007, 0, 1, 0, 0.99983007, 0, 0.018434629, -60.718304, 10.589433, -21.008781)
+
 [node name="SpawnContainer" type="Node3D" parent="." unique_id=172307321]
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 2.9802322e-08, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, 9.536743e-07, 0, -4.7683716e-07)
@@ -19233,9 +19236,6 @@ track = NodePath("../Track")
 scatter_mesh = ExtResource("10_6qqxo")
 instance_count = 1000
 area_size = Vector2(500, 500)
-
-[node name="SimpleEnemy" parent="." unique_id=401680372 instance=ExtResource("10_taclm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -121.287415, 1.4116474, -28.782475)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=708495744]
 navigation_mesh = SubResource("NavigationMesh_pitpm")
