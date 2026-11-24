@@ -35,7 +35,7 @@ func shoot_ball(pos, dir, force):
 	spawn_container.add_child(new_bullet, true)
 	new_bullet.global_position = pos
 	new_bullet.global_rotation = dir
-	new_bullet.get_child(3).body_entered.connect(on_projectile_collide)
+	new_bullet.get_child(3).body_entered.connect(on_projectile_collide.bind(new_bullet))
 
 
 func move_projectiles(delta):
@@ -46,9 +46,12 @@ func move_projectiles(delta):
 	# This function will also be called in a for loop under the process function
 
 @rpc("authority","call_local")
-func on_projectile_collide(body): # Handles projectile collisions with bodies
+func on_projectile_collide(body,bullet): # Handles projectile collisions with bodies
 	if body == null:
 		return
 	elif body.is_in_group("Enemies") and is_multiplayer_authority():
 		body.take_damage.rpc(1,multiplayer.get_unique_id()) # Sends take damage call to all peers to sync
 		print(body)
+		bullet.queue_free()
+	elif body.is_in_group("Train"):
+		bullet.queue_free()
