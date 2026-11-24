@@ -33,7 +33,7 @@ func shoot_weapon():#Function to shoot the weapon
 		return
 	var dir = get_shoot_direction()
 	projectile_info.emit(global_position + (dir * 1.2), dir, WEAPON_TYPE.projectile_speed) #send signal back to playercontroller with information on the projectile
-	print(dir)
+
 
 
 func get_shoot_direction(): #Function to determine correct direction to fire projectile. TO DO change this function to just take the raycast from the gun but this requires the gun moving with camera.
@@ -45,7 +45,6 @@ func get_shoot_direction(): #Function to determine correct direction to fire pro
 		print("player shoot")
 		return (raycast_end - raycast_start).normalized()
 	else:
-		print("not player shoot?")
 		return shoot_direction
 
 func _on_player_controller_shoot_weapon(): #From playercontroller script upon shoot button

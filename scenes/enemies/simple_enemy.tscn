@@ -38,6 +38,8 @@ radius = 10.0
 size = Vector3(1, 1, 0.5)
 
 [node name="SimpleEnemy" type="CharacterBody3D" unique_id=401680372 node_paths=PackedStringArray("nav_agent", "state_chart", "health_component", "shoot_timer", "recalc_target")]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_2kgy0")
 nav_agent = NodePath("NavigationAgent3D")
 state_chart = NodePath("StateChart")

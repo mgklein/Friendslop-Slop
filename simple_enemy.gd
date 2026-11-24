@@ -14,6 +14,7 @@ extends BaseEnemy
 @export var recalc_target: Timer
 
 @export var target: Node3D
+@export var target_pos : Vector3
 var strafe_position : Vector3
 
 signal shoot_weapon_main
@@ -23,7 +24,7 @@ func _ready() -> void:
 	add_to_group("Enemies")
 	#Find Player
 	target = get_tree().get_first_node_in_group("Players")
-	
+	target_pos = target.global_position
 	#connect Signals
 	health_component.died.connect(_on_died)
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
@@ -50,6 +51,7 @@ func _on_follow_state_physics_processing(delta: float) -> void:
 	if not target:
 		return
 	
+	recalc_targets()
 	# Set target position for navigation
 	nav_agent.target_position = target.global_position
 	
@@ -94,14 +96,17 @@ func moving_to_target(delta):
 func take_damage(damage, source):
 	health_component.take_damage(damage)
 
-@rpc("any_peer","call_local") # Can receive damage call from any peer
+@rpc("authority","call_local") # Can receive damage call from any peer
 func recalc_targets():
 	var player_list: Array = get_tree().get_nodes_in_group("Players")
-	var closest_target_dist: float = 900
+	print("Player " + str(multiplayer.get_unique_id()) + "has list " + str(player_list))
+	var closest_target_dist: float = 9000
 	for i in player_list:
 		var player_distance = global_position.distance_to(i.global_position)
 		if player_distance < closest_target_dist:
 			target = i
+			closest_target_dist = player_distance
+	print("the peer id of " + str(multiplayer.get_unique_id()) + " targeted the player " + str(target))
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
@@ -158,4 +163,5 @@ func _on_weapon_projectile_info(projectile_position,projectile_rotation,projecti
 
 
 func _on_recalc_target_timeout():
-	recalc_targets.rpc()
+	if is_multiplayer_authority():
+		recalc_targets.rpc()
