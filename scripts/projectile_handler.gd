@@ -21,10 +21,10 @@ func _process(delta):
 	else:
 		move_projectiles(delta)
 
-@rpc("any_peer", "call_local") # This should likely only be called by the server. The clients should be able to tell the server they want to shoot and then the server shoots.
+@rpc("authority", "call_local") # This should likely only be called by the server. The clients should be able to tell the server they want to shoot and then the server shoots.
 func shoot_ball(pos, dir, force):
 	if !is_multiplayer_authority():
-		return
+		pass
 	#var new_ball: RigidBody3D = BALL.instantiate() #Eventually, this will create a projectile from the dictionary of projectiles
 	#new_ball.source = multiplayer.get_remote_sender_id()
 	#new_ball.position = pos

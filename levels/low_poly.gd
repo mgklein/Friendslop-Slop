@@ -19,6 +19,7 @@ func _ready() -> void:
 	Global.level = self
 	Global.spawn_container = spawn_container
 	ProjectileHandler.spawn_container = spawn_container
+	
 
 
 func _physics_process(delta: float) -> void:
