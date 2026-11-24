@@ -47,6 +47,7 @@ folder_colors={
 [global_group]
 
 Navigation=""
+Bullet_spawn="Bullet container"
 
 [importer_defaults]
 
