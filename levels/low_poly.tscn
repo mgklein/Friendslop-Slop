@@ -19238,4 +19238,5 @@ area_size = Vector2(500, 500)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -121.287415, 1.4116474, -28.782475)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=708495744]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_pitpm")

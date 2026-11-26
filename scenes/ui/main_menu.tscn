@@ -86,10 +86,20 @@ max_length = 12
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="ButtonJoinTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu" unique_id=2037560314]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu" unique_id=350192475]
+layout_mode = 2
+
+[node name="ButtonJoinTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu/HBoxContainer" unique_id=2037560314]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Join"
+size_flags_horizontal = 3
+text = "Join Matt"
+
+[node name="ButtonJoinTube2" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu/HBoxContainer" unique_id=506395566]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join Gunnar"
 
 [node name="ButtonQuitTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu" unique_id=953135029]
 unique_name_in_owner = true
@@ -99,9 +109,19 @@ text = "Quit"
 [node name="HSeparator2" type="HSeparator" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu" unique_id=1428091171]
 layout_mode = 2
 
-[node name="ButtonCreateTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu" unique_id=370543791]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu" unique_id=168359592]
+layout_mode = 2
+
+[node name="ButtonCreateTube" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu/HBoxContainer2" unique_id=370543791]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/icon_max_width = 24
-text = "Create Session"
+text = "Create Session Matt"
 icon = ExtResource("2_fe2o3")
+
+[node name="ButtonCreateTube2" type="Button" parent="Control/Center/MarginContainer/HBoxContainer/TubeMenu/HBoxContainer2" unique_id=618376074]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create Session Gunnar"
+icon = ExtResource("2_fe2o3")
+expand_icon = true
