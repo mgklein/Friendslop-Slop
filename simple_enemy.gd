@@ -99,14 +99,12 @@ func take_damage(damage, source):
 @rpc("authority","call_local") # Can receive damage call from any peer
 func recalc_targets():
 	var player_list: Array = get_tree().get_nodes_in_group("Players")
-	print("Player " + str(multiplayer.get_unique_id()) + "has list " + str(player_list))
 	var closest_target_dist: float = 9000
 	for i in player_list:
 		var player_distance = global_position.distance_to(i.global_position)
 		if player_distance < closest_target_dist:
 			target = i
 			closest_target_dist = player_distance
-	print("the peer id of " + str(multiplayer.get_unique_id()) + " targeted the player " + str(target))
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
