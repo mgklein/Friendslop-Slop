@@ -19220,7 +19220,7 @@ unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 2.9802322e-08, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, 9.536743e-07, 0, -4.7683716e-07)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1027338863]
-_spawnable_scenes = PackedStringArray("uid://bho3wc4uv8v07", "uid://dlsk78b4aki17")
+_spawnable_scenes = PackedStringArray("uid://bho3wc4uv8v07", "uid://dlsk78b4aki17", "uid://ciwb2wf4qn2yy")
 spawn_path = NodePath("../SpawnContainer")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=969942321]
