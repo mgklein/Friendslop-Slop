@@ -8,6 +8,7 @@ var game_controller: GameController
 var level: Node3D
 var spawn_container: Node3D
 var proj_speed: float = 40.0
+var projectile_array: Array
 
 const BALL = preload("uid://dlsk78b4aki17") #Eventually, make a dictionary pointing to specific projectiles with specific IDs. Currently there is only one projectile.
 
@@ -21,21 +22,18 @@ func _process(delta):
 	else:
 		move_projectiles(delta)
 
-@rpc("authority", "call_local") # This should likely only be called by the server. The clients should be able to tell the server they want to shoot and then the server shoots.
+@rpc("any_peer", "call_local") # This should likely only be called by the server. The clients should be able to tell the server they want to shoot and then the server shoots.
 func shoot_ball(pos, dir, force):
-	if !is_multiplayer_authority():
-		pass
-	#var new_ball: RigidBody3D = BALL.instantiate() #Eventually, this will create a projectile from the dictionary of projectiles
-	#new_ball.source = multiplayer.get_remote_sender_id()
-	#new_ball.position = pos
-	#spawn_container.add_child(new_ball, true)
-	#new_ball.apply_central_impulse(dir * force) # Once new projectile handling is added, this will be obsolete
+	if !is_multiplayer_authority(): #ensures that only the authority spawns the bullet which is then replicated across all peers with the mulitplayerspawner node
+		return
 	var new_bullet = bullet.instantiate()
 	#new_bullet.source = multiplayer.get_remote_sender_id()
+	print(new_bullet.name)
 	spawn_container.add_child(new_bullet, true)
 	new_bullet.global_position = pos
 	new_bullet.global_rotation = dir
 	new_bullet.get_child(3).body_entered.connect(on_projectile_collide.bind(new_bullet))
+	projectile_array.append(new_bullet.name)
 
 
 func move_projectiles(delta):
@@ -54,4 +52,6 @@ func on_projectile_collide(body,bullet): # Handles projectile collisions with bo
 		print(body)
 		bullet.queue_free()
 	elif body.is_in_group("Train"):
+		bullet.queue_free()
+	else:
 		bullet.queue_free()
