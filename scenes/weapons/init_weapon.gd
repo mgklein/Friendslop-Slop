@@ -14,7 +14,7 @@ extends Node3D
 @export var dispersion : float = 0.05
 @export var barrel_length : float = 0
 var shoot_direction : Vector3
-
+var animation_player: AnimationPlayer
 
 signal projectile_info
 
@@ -34,7 +34,13 @@ func load_weapon(): #function to initialize the weapon. Call this when switching
 	add_child(weapon_model,true)
 	weapon_model.position = WEAPON_TYPE.position
 	weapon_model.rotation_degrees = WEAPON_TYPE.rotation
-	
+	var num_childs = weapon_model.get_child_count()
+	animation_player = weapon_model.get_child(num_childs-1)
+
+
+@rpc("any_peer","call_local")
+func play_shoot_animation():
+	animation_player.play("shoot")
 
 @rpc("any_peer", "call_local")
 func shoot_weapon():#Function to shoot the weapon
@@ -42,6 +48,8 @@ func shoot_weapon():#Function to shoot the weapon
 		return
 	var dir = get_shoot_direction()
 	projectile_info.emit(global_position + (dir * 1.2), dir, WEAPON_TYPE.projectile_speed) #send signal back to playercontroller with information on the projectile
+	if animation_player != null:
+		play_shoot_animation.rpc()
 
 
 
@@ -53,7 +61,6 @@ func get_shoot_direction(): #Function to determine correct direction to fire pro
 		var viewport_rect = get_viewport().get_visible_rect().size
 		var raycast_start = camera.project_ray_origin(viewport_rect / 2)
 		var raycast_end = raycast_start + camera.project_ray_normal(viewport_rect / 2) * 200
-		print("player shoot")
 		return (raycast_end - raycast_start).normalized()
 	else:
 		return shoot_direction

@@ -7,14 +7,19 @@ extends Node
 var game_controller: GameController
 var level: Node3D
 var spawn_container: Node3D
-var proj_speed: float = 1.0
+var proj_speed: float = 40.0
 var projectile_array: Array
+
+var projectile_resource_paths: Array
+
+var projectile_dictionary : Dictionary = {}
 
 const BALL = preload("uid://dlsk78b4aki17") #Eventually, make a dictionary pointing to specific projectiles with specific IDs. Currently there is only one projectile.
 
 var bullet = preload("uid://ciwb2wf4qn2yy")
 
 func _ready():
+	load_projectile_resources()
 	if is_multiplayer_authority():
 		return
 	ProjectileHandler.catch_up_client.rpc_id(1)
@@ -27,6 +32,19 @@ func _process(delta):
 		return
 	else:
 		move_projectiles(delta)
+
+func load_projectile_resources(): # This loads all resources in the assets/weapons folder which are the projectile resources
+	var weapon_folder_path : String = "res://assets/weapons/"
+	var weapons_folder = ResourceLoader.list_directory(weapon_folder_path)
+	for i in weapons_folder:
+		var subfiles = ResourceLoader.list_directory(weapon_folder_path + i)
+		for x in subfiles:
+			if x.ends_with("tres"):
+				projectile_resource_paths.append(weapon_folder_path + i + x)
+	for i in projectile_resource_paths:
+		var proj_resource = ResourceLoader.load(i)
+		projectile_dictionary.get_or_add(proj_resource.name,proj_resource.projectile_scene)
+
 
 @rpc("any_peer","call_remote")
 func catch_up_client():
@@ -67,7 +85,6 @@ func on_projectile_collide(body,bullet): # Handles projectile collisions with bo
 		return
 	elif body.is_in_group("Enemies") and is_multiplayer_authority():
 		body.take_damage.rpc(1,multiplayer.get_unique_id()) # Sends take damage call to all peers to sync
-		print(body)
 		bullet.queue_free()
 	elif body.is_in_group("Train"):
 		bullet.queue_free()
