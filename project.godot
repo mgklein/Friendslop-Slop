@@ -48,6 +48,7 @@ folder_colors={
 
 Navigation=""
 Bullet_spawn="Bullet container"
+Train=""
 
 [importer_defaults]
 

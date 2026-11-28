@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapons" format=3 uid="uid://bevaerbg7e05y"]
+
+[ext_resource type="PackedScene" uid="uid://b472vxn86e4qi" path="res://scenes/props/gunemplacement.tscn" id="1_f2axl"]
+[ext_resource type="Script" uid="uid://d3b4gr04a07yq" path="res://scenes/weapons/weapons.gd" id="1_k2nop"]
+[ext_resource type="PackedScene" uid="uid://ciwb2wf4qn2yy" path="res://scenes/weapons/ak_bullet.tscn" id="2_4gm0c"]
+
+[resource]
+script = ExtResource("1_k2nop")
+name = &"MGemplacement"
+position = Vector3(0, -5, 0)
+mesh = ExtResource("1_f2axl")
+shootable = true
+projectile_speed = 100
+projectile_scene = ExtResource("2_4gm0c")
+metadata/_custom_type_script = "uid://d3b4gr04a07yq"

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bcy3m78kcvkn3"]
+
+[ext_resource type="Script" uid="uid://0sci5x5358wk" path="res://scenes/enemies/emplacedmgtest.gd" id="1_8epgy"]
+[ext_resource type="PackedScene" uid="uid://dqj1qp7f6n06n" path="res://scenes/weapons/weapon.tscn" id="2_x85sf"]
+[ext_resource type="Resource" uid="uid://bevaerbg7e05y" path="res://assets/weapons/gunemplacement/gunemplacement_mg_test.tres" id="3_x85sf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pitpm"]
+radius = 63.227
+
+[node name="Emplacedmgtest" type="Node3D" unique_id=674808214 node_paths=PackedStringArray("weapon_node", "shoot_timer")]
+script = ExtResource("1_8epgy")
+weapon_node = NodePath("Weapon")
+shoot_timer = NodePath("Timer")
+
+[node name="Weapon" parent="." unique_id=207957914 instance=ExtResource("2_x85sf")]
+WEAPON_TYPE = ExtResource("3_x85sf")
+
+[node name="Timer" type="Timer" parent="." unique_id=748721301]
+wait_time = 0.05
+autostart = true
+
+[node name="detectionarea" type="Area3D" parent="." unique_id=1456639694]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detectionarea" unique_id=1041398230]
+shape = SubResource("SphereShape3D_pitpm")
+
+[connection signal="shoot_weapon_main" from="." to="Weapon" method="_on_simple_enemy_shoot_weapon_main"]
+[connection signal="projectile_info" from="Weapon" to="." method="_on_weapon_projectile_info"]
+[connection signal="timeout" from="Timer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
