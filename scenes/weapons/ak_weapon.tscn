@@ -1,5 +1,80 @@
 [gd_scene format=3 uid="uid://fybawbkemhyf"]
 
 [ext_resource type="PackedScene" uid="uid://cvcjucjlvuu5e" path="res://assets/weapons/AK/AKWeapon.glb" id="1_s400x"]
+[ext_resource type="Texture2D" uid="uid://bn1xisrv42go8" path="res://assets/textures/flare/flare.png" id="2_ove1p"]
+
+[sub_resource type="Animation" id="Animation_loegm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("muzzleflash2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("muzzleflash1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_olthv"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("muzzleflash2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("muzzleflash1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2hai"]
+_data = {
+&"RESET": SubResource("Animation_loegm"),
+&"shoot": SubResource("Animation_olthv")
+}
 
 [node name="AKWeapon" unique_id=628812095 instance=ExtResource("1_s400x")]
+
+[node name="muzzleflash1" type="Sprite3D" parent="." index="6" unique_id=678830146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116547376, 0.92259246)
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_ove1p")
+
+[node name="muzzleflash2" type="Sprite3D" parent="." index="7" unique_id=1834972827]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.116547376, 0.92259246)
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_ove1p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8" unique_id=1528781471]
+libraries/ = SubResource("AnimationLibrary_g2hai")

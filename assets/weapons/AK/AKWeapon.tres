@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://fybawbkemhyf" path="res://scenes/weapons/ak_weapon.tscn" id="1_ktrwl"]
 [ext_resource type="Script" uid="uid://d3b4gr04a07yq" path="res://scenes/weapons/weapons.gd" id="1_lwh18"]
-[ext_resource type="PackedScene" uid="uid://dlsk78b4aki17" path="res://scenes/props/ball.tscn" id="2_bd6hg"]
+[ext_resource type="PackedScene" uid="uid://ciwb2wf4qn2yy" path="res://scenes/weapons/ak_bullet.tscn" id="2_bd6hg"]
 
 [resource]
 script = ExtResource("1_lwh18")
