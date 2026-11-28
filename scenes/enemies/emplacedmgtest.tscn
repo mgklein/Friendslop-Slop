@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://0sci5x5358wk" path="res://scenes/enemies/emplacedmgtest.gd" id="1_8epgy"]
 [ext_resource type="PackedScene" uid="uid://dqj1qp7f6n06n" path="res://scenes/weapons/weapon.tscn" id="2_x85sf"]
 [ext_resource type="Resource" uid="uid://bevaerbg7e05y" path="res://assets/weapons/gunemplacement/gunemplacement_mg_test.tres" id="3_x85sf"]
-[ext_resource type="PackedScene" uid="uid://c1574inxe0is4" path="res://scenes/weapons/gunemplacement.tscn" id="4_g6yje"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pitpm"]
 radius = 63.227
@@ -24,8 +23,6 @@ autostart = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="detectionarea" unique_id=1041398230]
 shape = SubResource("SphereShape3D_pitpm")
-
-[node name="gunemplacement" parent="." unique_id=1827310542 instance=ExtResource("4_g6yje")]
 
 [connection signal="shoot_weapon_main" from="." to="Weapon" method="_on_simple_enemy_shoot_weapon_main"]
 [connection signal="projectile_info" from="Weapon" to="." method="_on_weapon_projectile_info"]

@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 #Handles all weapon interaction for the individual player or parent
 
@@ -11,6 +12,7 @@ extends Node3D
 @export var player_node : CharacterBody3D
 
 @export var dispersion : float = 0.05
+@export var barrel_length : float = 0
 var shoot_direction : Vector3
 
 
@@ -28,8 +30,11 @@ func _ready():
 
 func load_weapon(): #function to initialize the weapon. Call this when switching or starting
 	weapon_mesh = WEAPON_TYPE.mesh
-	position = WEAPON_TYPE.position
-	rotation_degrees = WEAPON_TYPE.rotation
+	var weapon_model = weapon_mesh.instantiate()
+	add_child(weapon_model,true)
+	weapon_model.position = WEAPON_TYPE.position
+	weapon_model.rotation_degrees = WEAPON_TYPE.rotation
+	
 
 @rpc("any_peer", "call_local")
 func shoot_weapon():#Function to shoot the weapon

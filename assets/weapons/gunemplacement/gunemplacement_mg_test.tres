@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_k2nop")
 name = &"MGemplacement"
+position = Vector3(0, -5, 0)
 mesh = ExtResource("1_f2axl")
 shootable = true
 projectile_speed = 100
