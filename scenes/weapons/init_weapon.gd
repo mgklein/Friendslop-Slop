@@ -35,7 +35,7 @@ func load_weapon(): #function to initialize the weapon. Call this when switching
 	weapon_model.position = WEAPON_TYPE.position
 	weapon_model.rotation_degrees = WEAPON_TYPE.rotation
 	var num_childs = weapon_model.get_child_count()
-	animation_player = weapon_model.get_child(num_childs-1) # Selects the last node as the animationplayer. Ensure the animation player is placed as the last node in the weapon model scene
+	animation_player = weapon_model.get_child(num_childs-1) # Selects the last node as the animationplayer. Ensure the animation player is placed as the last node in the weapon model scene. Also ensure that the animation is named "shoot"
 
 
 @rpc("any_peer","call_local")
